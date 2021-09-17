@@ -1,0 +1,60 @@
+
+body {
+    margin: 0;
+    background-color: rgb(26, 25, 25);
+}
+.header {
+    background-color: rgb(63, 63, 63);
+}
+
+.bigname {
+    text-align: center;
+    color: white;
+    padding-bottom: 20px;
+}
+
+.btn-YT {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    border: 2px solid white;
+    border-radius: 2px;
+
+}
+
+.btn-YT:hover {
+    transition: color 0.5s, border-color 0.5s;
+    color:rgb(205, 32, 31);
+    border:2px solid rgb(205, 32, 31);
+}
+
+.roflanlico {
+    max-height: 350px;
+    text-align: center;
+}
+.roflanlico img {
+    text-align: center;
+    max-height:350px;
+    width: auto;
+}
+
+.container {
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: justify;
+    color: white;
+}
+.menu {
+    padding: 20px 20px ;
+    max-width: 70%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.menu a {
+    text-decoration: none;
+    margin-right: 10px;
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+}
