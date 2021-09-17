@@ -12,7 +12,28 @@ body {
     background-color: rgb(63, 63, 63);
 }
 
+h1 {
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+}
+p {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16pt;
+}
+ul {
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: 15pt;
+    padding-left: 1em;
+}
 
+#quotes li{
+    list-style-type: none;
+}
+
+#quotes ul {
+    padding: 0;
+}
 
 .bigname {
     text-align: center;
@@ -30,7 +51,6 @@ body {
 }
 
 #map {
-    /* float: left; */
     width: 100%;
     height: 100%;
 }
@@ -48,7 +68,9 @@ iframe {
 
 .roflanlico {
     max-height: 350px;
-    text-align: center;
+    width: 50%;
+    float: right;
+    
 }
 .roflanlico img {
     text-align: center;
@@ -78,10 +100,11 @@ iframe {
 }
 
 #page-footer {
+    padding: 1px 0;
     background-color: rgb(63, 63, 63);;
     color: white;
     clear: both;
-    position: fixed;
+    /* position: fixed; */
     bottom: 0;
     width: 100%;
     text-align: center;
