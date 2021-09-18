@@ -1,0 +1,120 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+.header {
+    background-color: rgb(63, 63, 63);
+    text-align: center;
+    font-weight: bold;
+    font-size: 20pt;
+    margin: 0;
+    padding-bottom: 1px;
+}
+
+.header a {
+    text-decoration: none;
+    color: white;
+}
+.btn:hover, .menu a:hover{
+    transition: color 0.25s;
+    color: rgb(158, 157, 157);
+}
+
+.YTbtn {
+    border: 2px solid white;
+    border-radius: 2px;
+}
+
+.YTbtn:hover {
+    transition: color 0.5s, border-color 0.5s;
+    color:rgb(205, 32, 31);
+    border:2px solid rgb(205, 32, 31);
+}
+
+.menu a{
+    padding-right: 5%;
+}
+
+body {
+    margin: 0;
+    background-color: rgb(26, 25, 25);
+}
+
+main {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+
+main p {
+    font-weight:500;
+    color: white;
+    font-size: 16pt;
+    line-height: 1.5em;
+}
+
+#about {
+    float:right;
+}
+
+.roflanlico img {
+    padding-left: 1% ;
+    width: 50%;
+    float: right;
+}
+
+#about ul, #achievments ul {
+    padding-left: 1em;
+}
+
+#about li, #achievments li {
+    color: white;
+    font-size: 14pt ;
+}
+
+#quotes ul{
+    padding: 0;
+}
+
+#quotes li{
+    list-style-type: none;
+    text-align: center;
+    color: white;
+    font-size: 14pt ;
+    font-style: italic;
+}
+
+
+#page-footer {
+    padding: 1px 0;
+    background-color: rgb(63, 63, 63);
+    color: white;
+    clear: both;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+}
+
+iframe {
+    border: 0;
+    margin: 10px 12.5%;
+    height: 85%;
+    width: 75%;
+}
+
+#page-map-footer {
+    clear: both;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(63, 63, 63);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}

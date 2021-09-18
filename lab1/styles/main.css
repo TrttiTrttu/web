@@ -3,13 +3,23 @@ html, body {
     height: 100%;
 }
 
-
 body {
     margin: 0;
     background-color: rgb(26, 25, 25);
 }
 .header {
     background-color: rgb(63, 63, 63);
+}
+.menu a:hover {
+    transition: color 0.25s;
+    color: black;
+}
+
+#palata:hover {
+    text-decoration:  none;
+    color: whi;
+    transition: color 0.25s;
+    color: black;
 }
 
 h1 {
@@ -29,6 +39,7 @@ ul {
 
 #quotes li{
     list-style-type: none;
+    text-align: center;
 }
 
 #quotes ul {
@@ -42,12 +53,18 @@ ul {
 }
 
 .btn {
-    text-decoration: none;
     color: white;
     font-weight: bold;
     border: 2px solid white;
     border-radius: 2px;
+}
 
+.link {
+    color: black;
+}
+
+.nodecor {
+    text-decoration: none;
 }
 
 #map {
@@ -67,20 +84,19 @@ iframe {
 }
 
 .roflanlico {
-    max-height: 350px;
-    width: 50%;
+    width: 44%;
     float: right;
     
 }
 .roflanlico img {
-    text-align: center;
-    max-height:350px;
     width: auto;
+    padding-top: 36px;
+    margin-bottom: 0;
 }
 
 .container {
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
     text-align: justify;
     color: white;
 }
@@ -104,7 +120,6 @@ iframe {
     background-color: rgb(63, 63, 63);;
     color: white;
     clear: both;
-    /* position: fixed; */
     bottom: 0;
     width: 100%;
     text-align: center;
