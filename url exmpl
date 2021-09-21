@@ -1,0 +1,6 @@
+POST /post HTTP/1.1
+Host: httpbin.org
+Content-Type: application/x-www-form-urlencoded
+Content-length: 13
+
+say=Hi&to=Mom
