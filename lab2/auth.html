@@ -1,20 +1,45 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Авторизация</title>
-</head>
-<body>
-    <header class="header">
-        <nav class="menu">
-            <a href="#about">Факты из жизни</a>
-            <a href="#achievments">Достижения</a>
-            <a href="#quotes">Великие слова</a>
-        </nav>
-        <p><a class="btn" href="map.html">Виталий Arthas Цаль</a></p>
-        <p><a class="YTbtn" href="https://www.youtube.com/c/SpitefulDick">YT канал</a></p>
-    </header>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles/auth.css">
+        <title>Авторизация</title>
+    </head>
+    <body>
+        <main>
+            <header class="header">
+                <nav class="menu">
+                    <a href="index.html">Оставить отзыв</a>
+                    <a href="http://qwer.std-1695.ist.mospolytech.ru/">Главная</a>
+                </nav>
+            </header>
+
+            <form id="form" method="POST" action="https://httpbin.org/post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="login">Логин</label>
+                    <input type="text" id="login" name="login" placeholder="Ведите логин" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" name="password" required>
+                    
+                </div>
+                <div class="form-group">
+                    <label for="remember">Запомнить</label>
+                    <input type="checkbox" name="remember" id="remember" value="yes">
+                </div>
+                <div class="form-group">
+                    <input type="submit">    
+                </div>
+                 
+            </form>
+        
+            <footer id="page-footer">
+                <p>&copy;2021 Летов Г.В.</p>
+            </footer>
+        </main>
+    </body>
+
 </html>

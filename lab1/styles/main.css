@@ -17,7 +17,6 @@ body {
 
 #palata:hover {
     text-decoration:  none;
-    color: whi;
     transition: color 0.25s;
     color: black;
 }
