@@ -1,140 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Интернет-магазин</title>
-</head>
-<body>
-    <header class="header clearfix">
-        <div class="container">
-            <nav>
-        
-                <div class="navigation">
-                    <ul>
-                        <li> <a href="">Главная</a></li>
-                        <li><a href="">Информация</a></li>
-                        <li><a href="">Прайс-лист</a></li>
-                        <li><a href="">Магазины</a></li>
-                        <li><a href="">Контакты</a></li>
-                    </ul>
-                
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pivo</title>
+        <link rel="stylesheet" href="styles\styles.css">
+    </head>
+    <body>
+        <main>
+            <header class="header">
+                <nav class="menu">
+                    <a href="#lemonade">Лимонад</a>
+                    <a href="#cola">Coca-cola</a>
+                    <a href="#monster">Monster</a>
+                </nav>
+            </header>
+            <div class="container">
+                <h1 id="lemonade">лимонад</h1>
+                <div class="napitok">
+                    <div class="napitok-half">
+                        <h1>состав:</h1>
+                        <ul>
+                            <li>350 г сахара;</li>
+                            <li>2 л воды;</li>
+                            <li>350 мл свежевыжатого лимонного сока.</li>
+                        </ul>
+                    </div>
+                    <div class="napitok-half">
+                        <img src="images/lemonade.jpg" alt="pivo pic">
+                    </div>
+                    <div class="napitok-half">
+                        <h1>о напитке:</h1>
+                        <p>
+                            С XVII века лимонадом называется напиток, 
+                            приготавливаемый из лимонного сока и большого 
+                            количества воды. В 1767 году английский химик 
+                            Джозеф Пристли изобрел насос (сатуратор), который 
+                            насыщал воду газом, образующимся при брожении пива. 
+                            Промышленное производство таких насосов начал Якоб Швепп, 
+                            поэтому первой компанией, выпустившей в широкую продажу 
+                            газированные напитки, была «J. Schweppe & Co», основанная 
+                            Якобом Швеппом, в дальнейшем начавшая выпускать воды с 
+                            фруктовыми и ягодными сиропами.
+
+                        </p> 
+                    </div>
                 </div>
-                <div class="profile">
-                    <a href="">Вход</a>
-                </div>         
-            </nav>
-        </div>
-       <div class="clearfix">
-            
-       </div>
-    </header>
-    <main>
-        <div class="container clearfix">
-            
-            <aside class="sidebar">
-                <form>
-                    <section class="sidebar-section">
-                        <header class="sidebar-header">Производители</header>
-                        <div class="form-group"><input type="checkbox" name="manufacturer" id="manufacturer1"><label for="manufacturer1">Производитель 1</label></div>
-                        <div class="form-group"><input type="checkbox" name="manufacturer" id="manufacturer2"><label for="manufacturer2">Производитель 2</label></div>
-                        <div class="form-group"><input type="checkbox" name="manufacturer" id="manufacturer3"><label for="manufacturer3">Производитель 3</label></div>
-                        <div class="form-group"><input type="checkbox" name="manufacturer" id="manufacturer4"><label for="manufacturer4">Производитель 4</label></div>
-                        <div class="form-group"><input type="checkbox" name="manufacturer" id="manufacturer5"><label for="manufacturer5">Производитель 5</label></div>
-                        
-                    </section>
-                    <section class="sidebar-section">
-                        <header class="sidebar-header">Товары</header>
-                        <div class="form-group"><input type="radio" name="group" id="group1">Группа 1<label for="group1"></label></div>
-                        <div class="form-group"><input type="radio" name="group" id="group2">Группа 2<label for="group2"></label></div>
-                        <div class="form-group"><input type="radio" name="group" id="group3">Группа 3<label for="group3"></label></div>
-                        <div class="form-group"><input type="radio" name="group" id="group4">Группа 4<label for="group4"></label></div>
-                        <div class="form-group"><input type="radio" name="group" id="group5">Группа 5<label for="group5"></label></div>
-                    </section>
-                    <div class="form-group">
-                        <input class="apply-btn" type="submit" value="Применить">
-                    </div>
-                </form>
-            </aside>
-            <div class="page-content">
-                <h1 class="products-category-header">Товары для мёда</h1>
-                <div class="products-list">
-                    <div class="product-card">
-                        <div class="product-img">
-                            <img src="https://e7.pngegg.com/pngimages/369/831/png-clipart-shinji-ikari-kaworu-nagisa-neon-genesis-evangelion-rei-ayanami-mug-mug-child-black-hair.png" alt="">
-                        </div>
-                        <div class="product-details">
-                            <header>синдзи пьет чаёк</header>
-                            <p class="information">KFJKFJHS KDFHJFLKSJ DHFKSJDHFK SDJFHKS   FJSLDFHKSDfj    FJSLDFHKSDfj  ffgцпуе  FJSLDFHKSDfj  dfgdg  FJSLDFHKSDfj    FJSLDFHKSDfj </p>
-                            <div class="control">
-                                <button class="btn">    
-                                    <span class="price">1000 &#8381;</span>
-                                    <span class="buy">Заказать</span>
-
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-img">
-                            <img src="https://e7.pngegg.com/pngimages/369/831/png-clipart-shinji-ikari-kaworu-nagisa-neon-genesis-evangelion-rei-ayanami-mug-mug-child-black-hair.png" alt="">
-                        </div>
-                        <div class="product-details">
-                            <header>Такой себе чай</header>
-                            <p class="information">KFJKFJ HSKDFHJFLKSJ DHFKSJDHFKSDJFH KSFJSLDFHKSDfj</p>
-                            <div class="control">
-                                <button class="btn">
-                                    <span class="price">1000 &#8381;</span>
-                                    <span class="buy">Заказать</span>
-
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-img">
-                            <img src="https://e7.pngegg.com/pngimages/369/831/png-clipart-shinji-ikari-kaworu-nagisa-neon-genesis-evangelion-rei-ayanami-mug-mug-child-black-hair.png" alt="">
-                        </div>
-                        <div class="product-details">
-                            <header>Чай для нытиков</header>
-                            <p class="information">KFJKFJHS KDFHJFLKSJDH  FKSJDHFKSDJ FHKSFJSLD FHKSDfj</p>
-                            <div class="control">
-                                <button class="btn">
-                                    <span class="price">1000 &#8381;</span>
-                                    <span class="buy">Заказать</span>
-
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-img">
-                            <img src="https://e7.pngegg.com/pngimages/369/831/png-clipart-shinji-ikari-kaworu-nagisa-neon-genesis-evangelion-rei-ayanami-mug-mug-child-black-hair.png" alt="">
-                        </div>
-                        <div class="product-details">
-                            <header>Делишес чай</header>
-                            <p class="information">KFJKFJHSKDFHJFL KSJDHFKSJDHFKSDJ FHKSFJSLD FHKSDfj</p>
-                            <div class="control">
-                                <button class="btn">
-                                    <span class="price">1000 &#8381;</span>
-                                    <span class="buy">Заказать</span>
-
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
             </div>
-                       
-
-        </div>
-    </main>
-    <footer class="footer">
-        <div class="container">
-            &copy; 2021 ООО "Товары для меда"
-        </div>
-    </footer>
-</body>
+            <div class="container">
+                <h1 id="cola">Coca-cola</h1>
+                <div class="napitok">
+                    <div class="napitok-half">
+                        <ul>
+                            <li>??? ???? ????</li>
+                            <li>????????? ??</li>
+                            <li>???? ???? ??? ?</li>
+                        </ul>
+                    </div>
+                    <div class="napitok-half">
+                        <img src="images/cola.jpg" alt="cola pic">
+                    </div>
+                    <div class="napitok-half">
+                        <p>
+                            Напиток кока-кола был придуман в Атланте (штат Джорджия, 
+                            США) 8 мая 1886 года фармацевтом Джоном Ститом Пембертоном 
+                            — бывшим офицером американской Армии конфедерации (есть лег
+                            енда, что его придумал фермер, который продал свой рецепт Д
+                            жону Ститу за 250 долларов, о чём Джон Стит якобы сказал в
+                            одном из своих интервью). Название для нового напитка прид
+                            умал бухгалтер Пембертона — Фрэнк Робинсон, который также,
+                            владея каллиграфией, написал слова «Coca-Cola» фигурными 
+                            буквами, до сих пор являющимися логотипом напитка.
+                        </p> 
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <h1 id="monster">Monster</h1>
+                <div class="napitok">
+                    <div class="napitok-half">
+                        <ul>
+                            <li>кофеин;</li>
+                            <li>таурин;</li>
+                            <li>витаминный премикс;</li>
+                            <li>и прочее полезное...</li>
+                        </ul>
+                    </div>
+                    <div class="napitok-half">
+                        <img src="images/monster.jpg" alt="monster pic">
+                    </div>
+                    <div class="napitok-half">
+                        <p>
+                            Monster Energy — марка энергетических напитков, 
+                            принадлежащая компании Monster Beverage Corporation.
+                            В России марка представлена с 2015 года.
+                            Логотип был разработан калифорнийским брендинговым 
+                            агентством McLean Design и представляет собой ярко-зелёную букву 
+                            «М» на чёрном фоне, которая как будто «выцарапана» когтями монстра. 
+                            Цвет буквы и фона может варьироваться в зависимости от вкуса
+                        </p> 
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="footer">
+            &copy; Letov
+        </footer>
+    </body>
 </html>

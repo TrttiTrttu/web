@@ -1,0 +1,74 @@
+html{
+    font-size: 20px;
+}
+
+p{
+    color: rgb(187, 187, 187);;
+}
+
+body {
+    display: flex;
+    margin: 0;
+    background-color: rgb(26, 25, 25);
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    background-color: rgb(63, 63, 63);
+    padding: 20px 0;
+}
+
+.header a {
+    color: rgb(187, 187, 187);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 0 20px;
+}
+
+.container {
+    /* height: 50%; */
+    border-top: 5px solid rgb(63, 63, 63);
+    border-bottom: 5px solid rgb(63, 63, 63)k;
+}
+
+.container h1{
+    color: rgb(187, 187, 187);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.napitok {
+    display: flex;
+    height: 389px;
+    overflow: hidden;
+}
+
+.napitok-half  {
+    flex: 1;
+    padding: 10px;
+    
+}
+ .napitok-half li{
+     color: rgb(187, 187, 187);
+ }
+.napitok-half img {
+    width: 100%;
+    height: auto;
+}
+
+
+.footer{
+    background-color: rgb(63, 63, 63);
+    padding: 20px 0;
+    bottom: 0;
+    width: 100%;
+    padding: 1px 0;
+    color: white;
+    clear: both;
+    text-decoration: none;
+}
