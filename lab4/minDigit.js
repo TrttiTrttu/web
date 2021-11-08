@@ -1,10 +1,17 @@
 "use strict";
 
 function minDigit(x) {
-    let minTemp = 9;
-    while (x) {
-        if (x%10 < minTemp) minTemp = x%10;
-        x = Math.trunc(x/10);
+    let res = 10;
+    if (x == 0) {
+        return 0;
     }
-    return minTemp;
+    while (x) {
+        if (x % 10 < res){
+            res = x % 10
+        }
+        x = Math.trunc(x / 10)
+    }
+    return res;
 }
+
+console.log(minDigit(12837172831));
