@@ -101,7 +101,6 @@ function evaluate(str) {
     // your code here
     let polish = tokenize(compile(str));
     let stack = [];
-    //console.log(polish);
     for (const el of polish) {
         if (isNumeric(el)) {
             stack.push(Number(el))
@@ -110,6 +109,7 @@ function evaluate(str) {
                 case '+':
                     stack.push(stack.pop() + stack.pop());
                     break;
+
                 case '-':
                     let b = stack.pop();
                     let a = stack.pop();
@@ -123,6 +123,7 @@ function evaluate(str) {
                 case '/':
                     stack.push((stack.pop() / stack.pop())**-1);
                     break;
+
                 default:
                     break;
             }
@@ -148,17 +149,20 @@ function evaluate(str) {
 
 function clickHandler(event) {
     // your code here
-    if (event.target.className in { 'key-digit': 0, 'key-operation': 1, 'key-bracket': 2 }) {
-        document.querySelector('.expression').innerHTML += event.target.innerHTML;
-        return;
+    if (event.target.className == 'key-digit') {
+        document.querySelector('.screen').innerHTML += event.target.innerHTML;
     }
-
+    if (event.target.className == 'key-operation') {
+        document.querySelector('.screen').innerHTML += event.target.innerHTML;
+    }
+    if (event.target.className == 'key-bracket') {
+        document.querySelector('.screen').innerHTML += event.target.innerHTML;
+    }
     if (event.target.className == 'key-clear') {
-        document.querySelector('.expression').innerHTML = '';
+        document.querySelector('.screen').innerHTML = '';
     }
-
     if (event.target.className == 'key-result') {
-        document.querySelector('.expression').innerHTML = evaluate(document.querySelector('.expression').innerHTML)
+        document.querySelector('.screen').innerHTML = evaluate(document.querySelector('.screen').innerHTML)
     }
 }
 
@@ -166,6 +170,5 @@ function clickHandler(event) {
 // Назначьте нужные обработчики событий.
 window.onload = function () {
     // your code here
-    let buttons = document.querySelector('.buttons');
-    buttons.addEventListener('click', clickHandler);
+    document.querySelector('.buttons').addEventListener('click', clickHandler);
 }

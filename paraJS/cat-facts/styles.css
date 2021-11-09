@@ -1,0 +1,102 @@
+body {
+    margin: 0;
+    background-color: white;
+}
+
+.header {
+    display: flex;
+    background-color: #1d3557;
+    padding: 20px 50px;
+    color: white;
+}
+
+.header .title {
+    font-size: 40px;
+    margin-left: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.facts-list {
+    margin: 30px 0;
+}
+
+.facts-list-item {
+    margin-top: 20px;
+    background-color: #d7d7d7;
+}
+
+.facts-list-item:first-child {
+    margin-top: 0;
+}
+
+.item-content {
+    padding: 20px;
+}
+
+.item-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #1d3557;
+    color: white;
+    font-weight: bold;
+}
+
+.upvotes {
+    background-image: url();
+    background-size: contain;
+    padding-left: 30px;
+    background-position:left;
+    background-repeat: none;
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+.btn {
+    box-sizing: border-box;
+    font-weight: bold;
+    background-color: #e63946;
+    border: 5px solid #e63946;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font-size: 100%;
+    padding: 5px;
+}
+
+.btn:hover {
+    background-color: #f1faee;
+    color: black;
+}
+
+.active {
+    background-color: #f1faee;
+    color: black;
+}
+
+.first-page-btn, .last-page-btn {
+    width: 250px;
+}
+
+.pagination-info {
+    display: flex;
+    font-weight: bold;
+}
+
+.current-interval-info {
+    margin-left: auto;
+}
+
+.per-page-btn {
+    background-color: white;
+    border: 1px solid black;
+}
