@@ -35,10 +35,6 @@ main{
     color: #c1e977;
 }
 
-.buttons button:hover{
-    background-color: gray;
-}
-
 .calc-container span, button{
     font-size: 50px;
 
@@ -67,8 +63,6 @@ main{
     width: 90px;
     color: #c0c0c0;
     background-color: #232323;
-    border: #232323;
-    transition-duration: 0.4s;
     cursor: pointer;
 }
 

@@ -54,6 +54,49 @@ function setPaginationInfo(info) {
     document.querySelector('.current-interval-end').innerHTML = end;
 }
 
+function createPageBtn(page, classes=[]) {
+    let btn = document.createElement('button');
+    classes.push('btn');
+    btn.classList.add(...classes);
+    btn.dataset.page = page;
+    btn.innerHTML = page;
+    return btn;
+}
+
+function renderPaginationElement(info) {
+    let btn;
+    let paginationContainer = document.querySelector('.pagination');
+    paginationContainer.innerHTML = '';
+
+    if (info.total_count == 0)
+        return;
+    
+    btn = createPageBtn(1,['first-page-btn']);
+    btn.innerHTML = 'Первая страница';
+    if (info.current_page == 1) {
+        btn.style.visibility = 'hidden';
+    }
+    paginationContainer.append(btn);
+
+    let buttonsContainer = document.createElement('div');
+    buttonsContainer.classList.add('pages-btns');
+    paginationContainer.append(buttonsContainer);
+
+    let start = Math.max(info.current_page -2, 1);
+    let end = Math.min(info.current_page + 2, info.total_pages);
+    for (let i = start; i <= end; i++) {
+        buttonsContainer.append(createPageBtn(i, i == info.current_page ? ['active'] : []));
+    }
+
+    btn = createPageBtn(info.total_pages,['last-page-btn']);
+    btn.innerHTML = 'Последняя страница';
+    if (info.current_page == info.total_pages) {
+        btn.style.visibility = 'hidden';
+    }
+    paginationContainer.append(btn);
+    
+}
+
 function downloadData(page=1) {
     let factsList = document.querySelector('.facts-list');
     let perPage = document.querySelector('.per-page-btn').value;
@@ -67,6 +110,7 @@ function downloadData(page=1) {
     xhr.onload = function () {
         renderRecords(this.response.records);
         setPaginationInfo(this.response['_pagination']);
+        renderPaginationElement(this.response['_pagination']);
     }
     xhr.send();
 }

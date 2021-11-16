@@ -100,3 +100,36 @@ body {
     background-color: white;
     border: 1px solid black;
 }
+
+.search-form {
+    margin: 50px 0;
+    display: flex;
+}
+
+#search-field {
+    flex-grow: 1;
+    height: 45px;
+    box-sizing: border-box;
+    border: 5px solid #e63946;
+    font-size: 100%;
+    padding: 0 20px;
+    outline: none;
+}
+
+.search-btn {
+    box-sizing: border-box;
+    font-size: 100%;
+    padding: 0 20px;
+    font-weight: bold;
+    background-color: #e63946;
+    border: 5px solid #e63946;
+    border-left: none;
+    color: white;
+    outline: none;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    background-color: #f1faee;
+    color: black;
+}

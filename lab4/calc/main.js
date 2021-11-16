@@ -101,11 +101,11 @@ function evaluate(str) {
     // your code here
     let polish = tokenize(compile(str));
     let stack = [];
-    for (const el of polish) {
-        if (isNumeric(el)) {
-            stack.push(Number(el))
+    for (const element of polish) {
+        if (isNumeric(element)) {
+            stack.push(Number(element))
         } else {
-            switch (el) {
+            switch (element) {
                 case '+':
                     stack.push(stack.pop() + stack.pop());
                     break;
@@ -121,7 +121,9 @@ function evaluate(str) {
                     break;
 
                 case '/':
-                    stack.push((stack.pop() / stack.pop())**-1);
+                    let d = stack.pop();
+                    let c = stack.pop();
+                    stack.push(c / d);
                     break;
 
                 default:
