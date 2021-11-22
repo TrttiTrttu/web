@@ -17,7 +17,9 @@
         <div class="container">
 
             <div class="search-form">
-                <input type="text" id="search-field">
+                <input type="text" list="search-text" id="search-field" placeholder="Search post">
+                <datalist id="search-text">
+                </datalist>
                 <button class="search-btn">Найти</button>
             </div>
 
@@ -42,6 +44,8 @@
                 </span>
             </div>
             <div class="facts-list" data-url="http://cat-facts-api.std-900.ist.mospolytech.ru/facts">
+            </div>
+            <div class="search-list" data-url="http://cat-facts-api.std-900.ist.mospolytech.ru/autocomplete">
             </div>
 
             <div class="pagination">

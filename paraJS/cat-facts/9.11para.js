@@ -1,5 +1,33 @@
 'use strict';
 
+function createDatalistItemElement(record) {
+    let itemElement = document.createElement('option');
+    itemElement.value = record;
+    return itemElement;
+}
+
+function recordsAutocomplete(records) {
+    let searchText = document.querySelector('#search-text');
+    searchText.innerHTML = '';
+    for (let record of records) {
+        searchText.append(createDatalistItemElement(record));
+    }
+}
+
+function rendersAutocomplete(text) {
+    let searhList = document.querySelector('.search-list');
+    let url = new URL(searhList.dataset.url);
+    url.searchParams.append('q', text);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
+    xhr.responseType = 'json';
+    xhr.onload = function () {
+        recordsAutocomplete(this.response);
+    }
+    xhr.send();
+}
+
 function createUpvotesElement(num) {
     let upvotesElement = document.createElement('div');
     upvotesElement.classList.add('upvotes');
@@ -101,8 +129,11 @@ function downloadData(page=1) {
     let factsList = document.querySelector('.facts-list');
     let perPage = document.querySelector('.per-page-btn').value;
     let url = new URL(factsList.dataset.url);
+    let text = document.querySelector('#search-field').value;
     url.searchParams.append('page', page);
+    if (text != '') url.searchParams.append('q', text);
     url.searchParams.append('per-page', perPage);
+
     
     let xhr = new XMLHttpRequest();
     xhr.open('GET', url);
@@ -115,6 +146,14 @@ function downloadData(page=1) {
     xhr.send();
 }
 
+function searchBtnHandler(event) {
+    downloadData(1);
+}
+
+function searchFieldHandler (event) {
+    rendersAutocomplete(event.target.value);
+}
+
 function pageBtnHandler(event) {
     if (event.target.dataset.page) {
         downloadData(event.target.dataset.page);
@@ -122,7 +161,7 @@ function pageBtnHandler(event) {
     }
 }
 
-function perPageBtnHandler(event) {
+function perPageBtnHandler() {
     downloadData(1);
 }
 
@@ -130,4 +169,6 @@ window.onload = function () {
     downloadData();
     document.querySelector('.pagination').onclick = pageBtnHandler;
     document.querySelector('.per-page-btn').onchange = perPageBtnHandler;
+    document.querySelector('#search-field').oninput = searchFieldHandler; 
+    document.querySelector('.search-btn').onclick = searchBtnHandler;
 }
