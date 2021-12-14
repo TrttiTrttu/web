@@ -1,0 +1,35 @@
+.banner {
+    background-color: #eaecf0;
+}
+
+.call-to-action {
+    background-color: #011627;
+    color: white;
+}
+
+.heading-line {
+    background-color: #83f3ed;
+    height: 3px;
+    width: 200px;
+}
+
+.program i {
+    font-size: 2rem;
+    color: #83f3ed;
+}
+
+.dark {
+    background-color: #011627;
+    color: #83f3ed;
+    height: 300px;
+}
+
+.tech-img {
+    object-fit: cover;
+    height: 300px;
+}
+
+.footer {
+    background-color: #011627;
+    color: white;
+}
