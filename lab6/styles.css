@@ -1,7 +1,11 @@
 html {
-    font-size: 30px;
+    font-size: 20px;
     width: 100%;
 }
+
+/* main h1 {
+    font-size: 15px;
+} */
 
 main {
      color: white;
@@ -17,7 +21,8 @@ h1 {
 }
 
 .navbar {
-    background-color: #f8f9fa;
+    background-color: #83f3ed;
+    font-weight: bold;
 }
 
 .greeting {
@@ -34,4 +39,14 @@ h1 {
 
 .contacts {
     background-color:#39b54a;
+}
+
+.footer {
+    background-color: #83f3ed;
+}
+
+.heading-line {
+    background-color: #83f3ed;
+    height: 4px;
+    width: 300px;
 }
