@@ -18,11 +18,12 @@
 </head>
 
 <body>
+
     <header>
         <nav class="navbar navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="#">To Do List</a>
-                <button data-bs-toggle="modal" data-bs-target="#task-modal" class="btn btn-success"
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#task-modal"
                     data-action="create">Новая задача</button>
             </div>
         </nav>
@@ -31,7 +32,7 @@
     <main>
         <div class="container">
             <div class="alerts my-3">
-                <div class="alert alert-success alert-dismissible fade show alert-template d-none" role="alert">
+                <div id="alerts-template" class="alert alert-dismissible fade show d-none" role="alert">
                     <span class="msg">
                         <strong>Holy guacamole!</strong> You should check in on some of those fields below.
                     </span>
@@ -56,12 +57,10 @@
                                         <a class="move-btn move-to-do" title="Переместить в колонку To Do">
                                             <i class="fas fa-arrow-left"></i>
                                         </a>
-                                        <a data-bs-toggle="modal" data-bs-target="#task-modal" data-action="show"
-                                            title="Посмотреть">
+                                        <a data-bs-toggle="modal" data-bs-target="#task-modal" data-action="show" title="Посмотреть">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a data-bs-toggle="modal" data-bs-target="#task-modal" data-action="edit"
-                                            title="Редактировать">
+                                        <a data-bs-toggle="modal" data-bs-target="#task-modal" data-action="edit" title="Редактировать">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a data-bs-toggle="modal" data-bs-target="#remove-task-modal" data-action="remove" title="Удалить">
@@ -115,27 +114,27 @@
                         <div class="mb-3 row">
                             <label for="description" class="col-md-3 col-form-label">Описание задачи</label>
                             <div class="col-md-9">
-                                <textarea class="form-control" name="description" id="description" cols="30"
-                                    rows="10"></textarea>
+                                <textarea name="description" id="description" cols="30" rows="10"
+                                    class="form-control"></textarea>
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="column" class="col-md-3 col-form-label">Колонка</label>
                             <div class="col-md-9">
-                                <select class="form-select" name="column" id="column">
+                                <select name="column" id="column" class="form-select">
                                     <option value="to-do">To Do</option>
                                     <option value="done">Done</option>
                                 </select>
                             </div>
                         </div>
-                        <input type="hidden" name="task-id">
                         <input type="hidden" name="action">
+                        <input type="hidden" name="task-id">
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary action-task-btn"
-                        data-bs-dismiss="modal">Создать</button>
+                    <button data-bs-dismiss="modal" type="button"
+                        class="btn btn-primary action-task-btn">Создать</button>
                 </div>
             </div>
         </div>
@@ -156,7 +155,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
-                    <button data-bs-dismiss="modal" type="button" class="btn btn-danger delete-task-btn">Да</button>
+                    <button data-bs-dismiss="modal" type="button" class="btn btn-danger remove-task-btn">Да</button>
                 </div>
             </div>
         </div>
@@ -166,7 +165,7 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 
-    <script src="main.js" defer></script>
+    <script src="main.js"></script>
 </body>
 
 </html>

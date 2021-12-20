@@ -1,13 +1,13 @@
+.actions i {
+    font-family: FontAwesome;
+}
+
 .actions > * {
     margin-right: 0.5rem;
 }
 
 .actions > *:last-child {
     margin-right: 0;
-}
-
-.actions i {
-    font-family: FontAwesome;
 }
 
 .move-btn, .move-btn:hover {
@@ -19,4 +19,6 @@
     visibility: visible !important;
 }
 
-/* #to-do-list  */
+#to-do-list .move-to-do, #done-list .move-done {
+    display: none;
+}
