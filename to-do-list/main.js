@@ -40,7 +40,6 @@ async function createTaskElement(form) {
             return newTaskElement
         })
         .catch(err => showAlert(err, 'danger'));
-    console.log(data);
     return data
 
 }
