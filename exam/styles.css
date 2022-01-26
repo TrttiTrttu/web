@@ -1,8 +1,42 @@
-.carousel-inner {
-    height: 300px;
-    max-width: 50%;
+main {
+    background-color: #8aceff;
 }
 
-.carousel-inner img {
+.navbar {
+    background-color: #002137;
+}
+
+.nav-link {
+    color:darkturquoise;
+    font-size: larger;
+}
+
+.carousel-inner {
+    max-height: 500px;
+}
+
+.carousel-img {
     object-fit: cover;
+    height: 400px;
+}
+
+.cards-img {
+    width: 80%;
+}
+
+.heading-line {
+    background-color: #0d6efd;
+    height: 3px;
+    width: 300px;
+}
+
+.service-card {
+    width: 18rem;
+    background-color: #b3b3b3;
+}
+
+.service-card p {
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: larger;
 }
