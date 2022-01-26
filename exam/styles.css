@@ -1,9 +1,14 @@
 main {
-    background-color: #8aceff;
+    background-color: #ffff66;
 }
 
 .navbar {
     background-color: #002137;
+}
+
+form {
+    background-color: rgb(255,255,255,0.5);
+    
 }
 
 .nav-link {
@@ -32,7 +37,7 @@ main {
 
 .service-card {
     width: 18rem;
-    background-color: #b3b3b3;
+    background-color: #98cd30;
 }
 
 .service-card p {
