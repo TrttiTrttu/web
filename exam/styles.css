@@ -1,14 +1,21 @@
 main {
-    background-color: #ffff66;
+    background-color: #033478;
 }
 
 .navbar {
-    background-color: #002137;
+    background-color: #404040;
 }
 
-form {
-    background-color: rgb(255,255,255,0.5);
-    
+.carousel-caption, form, table, .cards, .options-checks{
+    background-color: rgb(255,255,255,0.7);
+}
+
+.carousel-caption h5{
+    color: #212529;
+}
+
+.carousel-caption p{
+    color: #232629;
 }
 
 .nav-link {
@@ -30,14 +37,14 @@ form {
 }
 
 .heading-line {
-    background-color: #0d6efd;
-    height: 3px;
+    background-color: #dee2e6;
+    height: 5px;
     width: 300px;
 }
 
 .service-card {
     width: 18rem;
-    background-color: #98cd30;
+    background-color: #93c5fa;
 }
 
 .service-card p {
@@ -45,3 +52,12 @@ form {
     font-weight: bold;
     font-size: larger;
 }
+
+footer {
+    background-color: #404040;
+}
+
+footer a, footer h5, h1 {
+    color: #dee2e6!important;
+}
+
