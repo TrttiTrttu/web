@@ -66,6 +66,7 @@ function paginationBtnHandler(event) {
         event.target.closest('.pagination').querySelector('.next').classList.remove('disabled');
         event.target.closest('.pagination').querySelector('.next_ten').classList.remove('disabled');
         event.target.closest('.pagination').querySelector('.back_ten').classList.add('disabled');
+        event.target.closest('.pagination').querySelector('.back').classList.remove('disabled');
 
         second_btn.querySelector('.pagination-btn').innerHTML = new_page;
         third_btn.querySelector('.pagination-btn').innerHTML = new_page + 1;
@@ -73,7 +74,8 @@ function paginationBtnHandler(event) {
     }
     else if ((Number(current_page) + flag) == 49) {
         new_page = 49;
-
+        
+        event.target.closest('.pagination').querySelector('.next').classList.remove('disabled');
         event.target.closest('.pagination').querySelector('.next_ten').classList.remove('disabled');
         event.target.closest('.pagination').querySelector('.back').classList.add('disabled');
         event.target.closest('.pagination').querySelector('.back_ten').classList.add('disabled');
