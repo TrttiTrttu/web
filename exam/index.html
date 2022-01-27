@@ -41,7 +41,7 @@
     <main>
         <div class="container">
             <div class="alerts pt-2">
-                <div id="alerts-template" class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+                <div id="alerts-template" class="alert alert-dismissible fade d-none show mb-0" role="alert">
                     <span class="msg">
                         <strong>Holy guacamole!</strong> You should check in on some of those fields below.
                     </span>
@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <section class="container py-2">
+        <section class="container py-2 d-none d-md-block">
             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
@@ -120,7 +120,7 @@
                     <div class="service-card text-center rounded">
                         <img src="images/warm.png" class="cards-img" alt="warm">
                         <div class="card-body">
-                            <p class="card-text text-center text-dark">Еда всегда горячая</p>
+                            <p class="card-text text-center text-dark">Всегда горячую</p>
                         </div>
                     </div>
                 </div>
@@ -128,7 +128,15 @@
                     <div class="service-card text-center rounded">
                         <img src="images/tasty.png" class="cards-img" alt="tasty">
                         <div class="card-body">
-                            <p class="card-text text-center text-dark">Вкусная</p>
+                            <p class="card-text text-center text-dark">Вкусную еду</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 my-2 d-flex justify-content-center">
+                    <div class="service-card text-center rounded">
+                        <img src="images/cheap.png" class="cards-img" alt="cheap">
+                        <div class="card-body">
+                            <p class="card-text text-center text-dark">Доступно</p>
                         </div>
                     </div>
                 </div>
@@ -137,14 +145,6 @@
                         <img src="images/virus_safety.png" class="cards-img" alt="safety">
                         <div class="card-body">
                             <p class="card-text text-center text-dark">С заботой о вашем здоровье</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 my-2 d-flex justify-content-center">
-                    <div class="service-card text-center rounded">
-                        <img src="images/cheap.png" class="cards-img" alt="cheap">
-                        <div class="card-body">
-                            <p class="card-text text-center text-dark">Дешево</p>
                         </div>
                     </div>
                 </div>
@@ -175,19 +175,13 @@
                     <div class="col-lg-6">
                         <label class="form-label" for="area">Административный округ</label>
                         <select class="form-select" id="area" aria-label="Default select example">
-                            <option selected>Open this select menu</option>
-                            <!-- <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option> -->
+                            <option value="1" selected>Не Выбрано</option>
                         </select>
                     </div>
                     <div class="col-lg-6">
                         <label class="form-label" for="district">Район</label>
                         <select class="form-select" id="district" aria-label="Default select example">
-                            <option selected>Open this select menu</option>
-                            <!-- <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option> -->
+                            <option value="1" selected>Не Выбрано</option>
                         </select>
                     </div>
                     <div class="col-lg-6">
@@ -195,19 +189,13 @@
                             <div class="col-lg-6">
                                 <label class="form-label" for="type">Тип</label>
                                 <select class="form-select" id="type" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
-                                    <!-- <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option> -->
+                                    <option value="1" selected>Не Выбрано</option>
                                 </select>
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label" for="disconts">Соц. скидки</label>
                                 <select class="form-select" id="disconts" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
-                                    <!-- <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option> -->
+                                    <option value="1" selected>Не Выбрано</option>
                                 </select>
                             </div>
                         </div>
@@ -226,32 +214,29 @@
                         <th class="text-end" scope="col">Действия</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">"Название"</th>
-                        <td>"Тип"</td>
-                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras justo nibh, vestibulum sed
-                            fringilla in</td>
-                        <td class="text-end"><button type="button" class="btn btn-secondary btn-sm">Выбрать</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">"Название"</th>
-                        <td>"Тип"</td>
-                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras justo nibh, vestibulum sed
-                            fringilla in</td>
-                        <td class="text-end"><button type="button" class="btn btn-secondary btn-sm">Выбрать</button>
-                        </td>
-                    </tr>
+                <tr id="restaurant-template" class="d-none">
+                    <th scope="row" class="rest-name">"Название"</th>
+                    <td class="rest-type">"Тип"</td>
+                    <td class="rest-address">"Адрес"</td>
+                    <td class="text-end"><button type="button" class="btn btn-secondary btn-sm">Выбрать</button>
+                    </td>
+                </tr>
+                <tbody id="rest-list">
                 </tbody>
             </table>
             <div class="d-flex justify-content-center">
                 <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    <li class="page-item back_ten disabled"><a class="page-link pagination-btn">&laquo;</a></li>
+                    <li class="page-item back disabled"><a class="page-link pagination-btn">&#8249;</a></li>
+                    <li class="page-item first active"><a class="page-link pagination-btn">1</a></li>
+                    <li class="page-item disabled empty_start d-none"><a class="page-link">...</a></li>
+                    <li class="page-item second"><a class="page-link pagination-btn">2</a></li>
+                    <li class="page-item third"><a class="page-link pagination-btn">3</a></li>
+                    <li class="page-item fourth"><a class="page-link pagination-btn">4</a></li>
+                    <li class="page-item disabled empty_end"><a class="page-link">...</a></li>
+                    <li class="page-item last"><a class="page-link pagination-btn">50</a></li>
+                    <li class="page-item next"><a class="page-link pagination-btn">&#8250;</a></li>
+                    <li class="page-item next_ten"><a class="page-link pagination-btn">&raquo;</a></li>
                 </ul>
             </div>
         </section>
@@ -270,7 +255,7 @@
             <div class="container py-3">
                 <div class="row row-cols-3">
                     <div class="col-12 col-md-4 my-2 my-md-0 d-flex justify-content-center">
-                        <div class="shadow card cards w-90">
+                        <div class="card cards w-90">
                             <img src="images/tmpfood.png" class="card-img-top w-50 mx-auto" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Card title</h5>
@@ -288,7 +273,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-4 my-2 my-md-0 d-flex justify-content-center">
-                        <div class="shadow card cards w-90">
+                        <div class="card cards w-90">
                             <img src="images/tmpfood.png" class="card-img-top w-50 mx-auto" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Card title</h5>
@@ -306,7 +291,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-4 my-2 my-md-0 d-flex justify-content-center">
-                        <div class="shadow card cards w-90">
+                        <div class="card cards w-90">
                             <img src="images/tmpfood.png" class="card-img-top w-50 mx-auto" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Card title</h5>
@@ -360,10 +345,150 @@
                     class="col-4 col-md-2 input-group-text border-end-0 text-end text-uppercase fw-bolder">Итого:</span>
                 <input type="text" class="col-8 col-md-8 form-control border-start-0 text-start" value="0 руб."
                     readonly>
-                <button type="button" class="col-12 col-md-2 btn btn-secondary btn-sm btn-danger fw-bolder">Оформить
+                <button type="button" class="col-12 col-md-2 btn btn-secondary btn-sm btn-danger fw-bolder"
+                    data-bs-toggle="modal" data-bs-target="#modal">Оформить
                     заказ</button>
             </div>
         </section>
+        <div class="modal" role="document" id="modal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel">Оформление заказа</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Позиции заказа</h4>
+                        <div class="card mb-3 template">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <div>
+                                            <img src="images/tmpfood.png" class="img-fluid rounded-3" alt="" width="64">
+                                        </div>
+                                        <div class="ms-3">
+                                            <h5 id="modal-set"></h5>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <h5 class="fw-normal mb-0">&#8381;</h5>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <h5 class="mb-0">&#8381;</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4>Дополнительные опции</h4>
+                        <ul class="list-unstyled">
+                            <li class="d-flex justify-content-between">
+                                <div>
+                                    <span>В два раза больше!</span>
+                                </div>
+                                <div>
+                                    <span id="modal-x2">Активно</span>
+                                </div>
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                <div>
+                                    <span>Только горячим!</span>
+                                </div>
+                                <div>
+                                    <span id="modal-cold">Активно</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <h4>Информация о предприятии</h4>
+                        <ul class="list-unstyled">
+                            <li class="d-flex justify-content-between">
+                                <div>
+                                    <p>Название предприятия:</p>
+                                </div>
+                                <div>
+                                    <p id="modal-name"></p>
+                                </div>
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                <div>
+                                    <p>Административный округ:</p>
+                                </div>
+                                <div>
+                                    <p id="modal-district"></p>
+                                </div>
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                <div>
+                                    <p>Район:</p>
+                                </div>
+                                <div>
+                                    <p id="modal-area"></p>
+                                </div>
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                <div>
+                                    <p>Адрес:</p>
+                                </div>
+                                <div>
+                                    <p id="modal-address" class="text-muted"></p>
+                                </div>
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                <div>
+                                    <p>Рейтинг:</p>
+                                </div>
+                                <div>
+                                    <p id="modal-rating"></p>
+                                </div>
+                            </li>
+                        </ul>
+                        <h4>Доставка</h4>
+                        <form>
+                            <div class="row mb-4">
+                                <label class="form-label col-lg-4" for="delivery-zone">Зона доставки:</label>
+                                <div class="col-lg-8">
+                                    <select id="delivery-zone" class="form-select" aria-label="delivery-zone">
+                                        <option selected>Первая зона</option>
+                                        <option>Вторая зона</option>
+                                        <option>Третья зона</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label class="form-label col-lg-4" for="delivery-address">Адрес:</label>
+                                <div class="col-lg-8">
+                                    <textarea id="delivery-address" class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label class="form-label col-lg-4" for="delivery-address">Стоимость доставки:</label>
+                                <div class="col-lg-8">
+                                    <span id="modal-delivery-cost"> 0 руб. </span>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label class="form-label col-lg-4" for="delivery-address">ФИО получателя:</label>
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" id="fio" placeholder="Фамилия Имя Отчество">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row mb-4 mt-5">
+                            <div class="col-lg-4">
+                                <h4>Итого:</h4>
+                            </div>
+                            <div class="col-lg-8">
+                                <h4><strong id="modal-total">100</strong> руб.</h4>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                        <button type="button" class="btn btn-primary">Подтвердить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <footer class="footer text-center text-muted border-top py-3 border-top border-5">
         <h5 class="text-light">&copy; ООО "Служба Доставки Еды"</h5>
@@ -391,6 +516,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+    <script src="screepts.js"></script>
 </body>
 
 </html>

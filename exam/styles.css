@@ -7,7 +7,7 @@ main {
 }
 
 .carousel-caption, form, table, .cards, .options-checks{
-    background-color: rgb(255,255,255,0.7);
+    background-color: rgb(255,255,255,0.7)!important;
 }
 
 .carousel-caption h5{
