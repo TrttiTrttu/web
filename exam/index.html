@@ -170,38 +170,39 @@
                     <div class="heading-line mx-auto"></div>
                 </div>
             </div>
-            <form class="container rounded py-2">
+            <form class="container rounded py-2" id="pagination">
                 <div class="row my-3">
                     <div class="col-lg-6">
-                        <label class="form-label" for="area">Административный округ</label>
-                        <select class="form-select" id="area" aria-label="Default select example">
-                            <option value="1" selected>Не Выбрано</option>
+                        <label class="form-label" for="admArea">Административный округ</label>
+                        <select class="form-select" name="admArea" id="admArea">
+                            <option value="1">Не Выбрано</option>
                         </select>
                     </div>
                     <div class="col-lg-6">
                         <label class="form-label" for="district">Район</label>
-                        <select class="form-select" id="district" aria-label="Default select example">
-                            <option value="1" selected>Не Выбрано</option>
+                        <select class="form-select" name="district" id="district">
+                            <option value="1">Не Выбрано</option>
                         </select>
                     </div>
                     <div class="col-lg-6">
                         <div class="row">
                             <div class="col-lg-6">
                                 <label class="form-label" for="type">Тип</label>
-                                <select class="form-select" id="type" aria-label="Default select example">
-                                    <option value="1" selected>Не Выбрано</option>
+                                <select class="form-select" name="type" id="type">
+                                    <option value="1">Не Выбрано</option>
                                 </select>
                             </div>
                             <div class="col-lg-6">
-                                <label class="form-label" for="disconts">Соц. скидки</label>
-                                <select class="form-select" id="disconts" aria-label="Default select example">
-                                    <option value="1" selected>Не Выбрано</option>
+                                <label class="form-label" for="discont">Соц. скидки</label>
+                                <select class="form-select" name="discont" id="discont">
+                                    <option value="1">Не Выбрано</option>
+                                    <option>Имеются</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 mt-2 mt-lg-0 text-center d-flex align-items-end justify-content-end">
-                        <button type="button" class="btn btn-primary btn-danger">Найти</button>
+                        <button type="button" class="btn btn-primary btn-danger" id="find_btn">Найти</button>
                     </div>
                 </div>
             </form>
@@ -226,17 +227,17 @@
             </table>
             <div class="d-flex justify-content-center">
                 <ul class="pagination">
-                    <li class="page-item back_ten disabled"><a class="page-link pagination-btn">&laquo;</a></li>
-                    <li class="page-item back disabled"><a class="page-link pagination-btn">&#8249;</a></li>
-                    <li class="page-item first active"><a class="page-link pagination-btn">1</a></li>
+                    <li class="page-item back_ten disabled"><a class="page-link pagination-btn" href="#pagination">&laquo;</a></li>
+                    <li class="page-item back disabled"><a class="page-link pagination-btn" href="#pagination">&#8249;</a></li>
+                    <li class="page-item first active"><a class="page-link pagination-btn" href="#pagination">1</a></li>
                     <li class="page-item disabled empty_start d-none"><a class="page-link">...</a></li>
-                    <li class="page-item second"><a class="page-link pagination-btn">2</a></li>
-                    <li class="page-item third"><a class="page-link pagination-btn">3</a></li>
-                    <li class="page-item fourth"><a class="page-link pagination-btn">4</a></li>
+                    <li class="page-item second"><a class="page-link pagination-btn" href="#pagination">2</a></li>
+                    <li class="page-item third"><a class="page-link pagination-btn" href="#pagination">3</a></li>
+                    <li class="page-item fourth"><a class="page-link pagination-btn" href="#pagination">4</a></li>
                     <li class="page-item disabled empty_end"><a class="page-link">...</a></li>
-                    <li class="page-item last"><a class="page-link pagination-btn">50</a></li>
-                    <li class="page-item next"><a class="page-link pagination-btn">&#8250;</a></li>
-                    <li class="page-item next_ten"><a class="page-link pagination-btn">&raquo;</a></li>
+                    <li class="page-item last"><a class="page-link pagination-btn" href="#pagination">25</a></li>
+                    <li class="page-item next"><a class="page-link pagination-btn" href="#pagination">&#8250;</a></li>
+                    <li class="page-item next_ten"><a class="page-link pagination-btn" href="#pagination">&raquo;</a></li>
                 </ul>
             </div>
         </section>
