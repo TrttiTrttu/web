@@ -1,8 +1,8 @@
-'use strict';
+ 'use strict';
 
 let api_key = '9d2427f4-8d5f-47be-888b-0159c5a73edb'
 let url = new URL('http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants')
-let menu_url = new URL('http://menuexam.std-1695.ist.mospolytech.ru/sets.json');
+let menu_url = new URL('http://webdev-exam-2022-1-u101u.std-1695.ist.mospolytech.ru/sets.json');
 let json_copy, json_filtred
 
 
