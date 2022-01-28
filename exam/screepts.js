@@ -260,7 +260,6 @@ function renderPaginationBtn(json) {
 
     }
     else {
-        console.log('QWEQWEQWEQEQWEQWEQEQWEQEQEQEQWEWE');
         document.querySelector('.last').querySelector('a').innerHTML = pages;
         for (let btn of document.querySelectorAll('.page-item')) {
             btn.classList.remove('d-none');
@@ -289,8 +288,7 @@ function findBtnHahdler(event) {
 
         if (flag) rtn.push(json_copy[i]);
     }
-    json_filtred = rtn;
-    console.log(json_copy, 'FILTR');
+    json_filtred = rtn; 
     renderPaginationBtn(rtn);
     renderRestaurants(rtn);
 
@@ -374,45 +372,60 @@ async function renderMenuCards() {
         .then(res => res.json())
         .then(json => menu = json)
         .catch(err => showAlert(err, 'danger'));
-    // console.log(menu, 'CARDS');
+
+    let menuSectionElement = document.querySelector('#cards-section')
+
+    menuSectionElement.innerHTML = '';
+
     for (let i = 0; i < menu.length; i++) {
         let newCardElement = document.querySelector('#card-template').cloneNode(true);
         newCardElement.querySelector('.card-img-top').src = menu[i].img;
-        console.log(newCardElement.querySelector('.card-img-top'), 'MENUUUUU');
+        newCardElement.querySelector('.card-title').innerHTML = menu[i].name;
+        newCardElement.querySelector('.card-text').innerHTML = menu[i].description;
+        newCardElement.querySelector('.card-body').id = i + 1;
+        newCardElement.classList.remove('d-none');
+        menuSectionElement.append(newCardElement);
+    }
+    document.getElementById('10').closest('.col-12').classList.add('mx-auto');
+
+    for (let btn of document.querySelectorAll('.calc-btn')) {
+        btn.onclick = calcBtnHandler;
     }
 }
 
-function renderPrice(name, address) {
-    renderMenuCards()
+async function renderPrice(name, address) {
+    await renderMenuCards()
 
-    // for (let el of document.querySelectorAll('.card-counter')) {
-    //     el.value = 0;
-    // }
+    for (let el of document.querySelectorAll('.card-counter')) {
+        el.value = 0;
+    }
 
-    // for (let el of document.querySelectorAll('#restaurant-template'))
-    //     if (el.classList.contains('table-active') && el.querySelector('.rest-address').innerHTML != address)
-    //         el.classList.remove('table-active')
+    for (let el of document.querySelectorAll('#restaurant-template'))
+        if (el.classList.contains('table-active') && el.querySelector('.rest-address').innerHTML != address)
+            el.classList.remove('table-active')
 
-    // for (let el of document.querySelectorAll('.preload-hide'))
-    //     if (el.classList.contains('d-none'))
-    //         el.classList.remove('d-none')
+    for (let el of document.querySelectorAll('.preload-hide'))
+        if (el.classList.contains('d-none'))
+            el.classList.remove('d-none')
 
-    // let prices = [];
-    // for (let el of json_filtred) {
-    //     if (el.name == name && el.address == address) {
-    //         for (let i = 1; i <= 10; i++) {
-    //             let set = 'prices.push(el.set_' + i + ');';
-    //             eval(set);
-    //         }
-    //     }
-    // }
+    document.getElementById('makeOrder').onclick = makeOrderBtnHandler;
 
-    // for (let i = 1; i < 11; i++) {
-    //     let ids = 'document.getElementById(\'' + i + '\').querySelector(\'.card-price\').innerHTML = (prices[i-1] + \' ₽\')';
-    //     eval(ids);
-    // }
+    let prices = [];
+    for (let el of json_filtred) {
+        if (el.name == name && el.address == address) {
+            for (let i = 1; i <= 10; i++) {
+                let set = 'prices.push(el.set_' + i + ');';
+                eval(set);
+            }
+        }
+    }
 
-    // renderTotalAmount();
+    for (let i = 1; i < 11; i++) {
+        let ids = 'document.getElementById(\'' + i + '\').querySelector(\'.card-price\').innerHTML = (prices[i-1] + \' ₽\')';
+        eval(ids);
+    }
+
+    renderTotalAmount();
 }
 
 function choiceBtnHandler(event) {
@@ -424,7 +437,136 @@ function choiceBtnHandler(event) {
     let name = str;
     let address = event.target.closest('#restaurant-template').querySelector('.rest-address').innerHTML;
     event.target.closest('#restaurant-template').classList.add('table-active');
+
+    renderModalData(name, address);
     renderPrice(name, address);
+}
+
+function renderModalData(name, address) {
+    let restName = document.getElementById('modal-name');
+    let restArea = document.getElementById('modal-area');
+    let restDist = document.getElementById('modal-district');
+    let restAddr = document.getElementById('modal-address');
+    let restRate = document.getElementById('modal-rating');
+
+    for (let el of json_filtred) {
+        if (el.name == name && el.address == address) {
+            restName.innerHTML = '';
+            restName.innerHTML = el.name;
+            restArea.innerHTML = '';
+            restArea.innerHTML = el.admArea;
+            restDist.innerHTML = '';
+            restDist.innerHTML = el.district;
+            restAddr.innerHTML = '';
+            restAddr.innerHTML = el.address;
+            restRate.innerHTML = '';
+            restRate.innerHTML = el.rate;
+        }
+    }
+}
+
+function renderModalOptions() {
+    if (document.getElementById('2-option').checked || document.getElementById('rand-option').checked)
+        document.getElementById('modal-options').classList.remove('d-none');
+    else
+        document.getElementById('modal-options').classList.add('d-none');
+
+    if (document.getElementById('rand-option').checked)
+        document.getElementById('modal-rand-option').classList.remove('d-none');
+    else
+        document.getElementById('modal-rand-option').classList.add('d-none');
+
+    if (document.getElementById('2-option').checked)
+        document.getElementById('modal-2-option').classList.remove('d-none');
+    else
+        document.getElementById('modal-2-option').classList.add('d-none');
+}
+
+
+
+function renderModalOrder() {
+    let orderElement = document.getElementById('order');
+    orderElement.innerHTML = '';
+    let counter = 0;
+
+    for (let i = 1; i < 11; i++) {
+        let menuCard = document.getElementById(i);
+        let cardPrice = menuCard.querySelector('.card-price').innerHTML.slice(0, menuCard.querySelector('.card-price').innerHTML.indexOf('₽' - 1));
+        let cardCounts = menuCard.querySelector('.card-counter').value;
+        if (document.getElementById('2-option').checked) {
+            cardCounts *= 2;
+        }
+
+        if (cardCounts != 0) {
+            counter++;
+            let newModalOrderElement = document.getElementById('order-template').cloneNode(true);
+
+            newModalOrderElement.querySelector('img').src = menuCard.closest('.cards').querySelector('img').src;
+            newModalOrderElement.querySelector('#order-count').innerHTML = cardCounts + ' x ' + cardPrice + ' ₽';
+            newModalOrderElement.querySelector('#order-total-count').innerHTML = Number(cardPrice * cardCounts) + ' ₽';
+            newModalOrderElement.classList.remove('d-none');
+
+            orderElement.append(newModalOrderElement);
+        }
+    }
+    return counter;
+}
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+function modalRandOption(counts) {
+    let randNum;
+    if (counts == 1) randNum = 1;
+    else randNum = getRandomInt(Number(counts));
+
+    let counter = 0;
+    for (let el of document.querySelector('#order').querySelectorAll('#order-template')) {
+        counter++;
+
+        if (randNum == counter) {
+            let oldPrice = el.querySelector('#order-total-count').innerHTML;
+            let newCounts = el.querySelector('#order-count').innerHTML;
+            newCounts += ' + 1';
+
+            el.querySelector('#order-count').innerHTML = newCounts;
+            el.querySelector('#order-total-count').innerHTML = oldPrice;
+        }
+
+    }
+
+}
+
+function renderTotal(coef) {
+    let sum = 0;
+    for (let el of document.querySelector('#order').querySelectorAll('#order-template')) {
+        let price = el.querySelector('#order-total-count').innerHTML;
+        price = price.slice(0, price.length - 2);
+        sum += Number(price);
+    }
+    sum = (sum/2 * coef) + 250;
+    document.querySelector('#modal-total').innerHTML = sum.toFixed(2);
+}
+
+function makeOrderBtnHandler() {
+    renderModalOptions();
+    if (document.getElementById('rand-option').checked)
+        modalRandOption(renderModalOrder());
+    else
+        renderModalOrder()
+    let coef = 1;
+
+    if (document.getElementById('2-option').checked) {
+        coef = 1.6;
+    }
+
+    renderTotal(coef);
+}
+
+function modalOrderBtnHahdler() {
+    let msg = 'Заказ успешно оформлен!'
+    showAlert(msg);
 }
 
 window.onload = function () {
@@ -435,12 +577,10 @@ window.onload = function () {
 
     document.getElementById('find_btn').onclick = findBtnHahdler;
 
+    document.getElementById('modal-confirm-btn').onclick = modalOrderBtnHahdler;
+    document.getElementById('modal-cancel-btn').onclick = hidePreloadElements;
     for (let btn of document.querySelectorAll('#choice-btn')) {
         btn.onclick = choiceBtnHandler;
-    }
-
-    for (let btn of document.querySelectorAll('.calc-btn')) {
-        btn.onclick = calcBtnHandler;
     }
 
     for (let btn of document.querySelectorAll('.pagination-btn')) {

@@ -262,27 +262,26 @@
                     <div class="heading-line mx-auto"></div>
                 </div>
             </div>
-            <div class="container py-3">
-                <div class="row row-cols-3">
-                    <div class="col-12 col-md-4 my-2 d-flex justify-content-center d-none" id="card-template">
-                        <div class="card cards w-90">
-                            <img src="images/tmpfood.png" class="card-img-top w-50 mx-auto mt-2" alt="...">
-                            <div class="card-body text-center" id="1">
-                                <h5 class="card-title">"Название блюда"</h5>
-                                <p class="card-text">"Описание"</p>
-                                <h5 class="card-price">0 &#8381;</h5>
-                                <div class="row w-75 mx-auto">
-                                    <button type="button"
-                                        class="col-4 btn btn-danger calc-btn btn-secondary fw-bolder">-</button>
-                                    <input type="text" class="col-4 text-center fw-bolder rounded card-counter"
-                                        value="0" readonly>
-                                    <button type="button"
-                                        class="col-4 btn btn-danger calc-btn btn-secondary fw-bolder">+</button>
-                                </div>
-                            </div>
+            <div class="col-12 col-md-4 my-2 d-flex justify-content-center d-none" id="card-template">
+                <div class="card cards w-90">
+                    <img src="images/tmpfood.png" class="card-img-top w-50 mx-auto mt-2" alt="...">
+                    <div class="card-body text-center" id="0">
+                        <h5 class="card-title">"Название блюда"</h5>
+                        <p class="card-text">"Описание"</p>
+                        <h5 class="card-price">0 &#8381;</h5>
+                        <div class="row w-75 mx-auto">
+                            <button type="button"
+                                class="col-4 btn btn-danger calc-btn btn-secondary fw-bolder">-</button>
+                            <input type="text" class="col-4 text-center fw-bolder rounded card-counter" value="0"
+                                readonly>
+                            <button type="button"
+                                class="col-4 btn btn-danger calc-btn btn-secondary fw-bolder">+</button>
                         </div>
                     </div>
-
+                </div>
+            </div>
+            <div class="container py-3">
+                <div class="row row-cols-3" id="cards-section">
                 </div>
             </div>
         </section>
@@ -304,13 +303,13 @@
                     <div class="col-12 col-lg-6 mx-auto mb-1">
                         <div class="row options-checks d-flex justify-content-center align-items-center rounded">
                             <p class="col-8 fs-2 my-0">Хочу подарок</p>
-                            <input class="col-4 form-check-input" type="checkbox" value="" id="option1">
+                            <input class="col-4 form-check-input" type="checkbox" value="" id="rand-option">
                         </div>
                     </div>
                     <div class="col-12 col-lg-6 mx-auto">
                         <div class="row options-checks d-flex justify-content-center align-items-center rounded">
                             <p class="col-8  fs-2 my-0">В два раза больше</p>
-                            <input class="col-4 form-check-input" type="checkbox" value="" id="option2">
+                            <input class="col-4 form-check-input" type="checkbox" value="" id="2-option">
                         </div>
                     </div>
                 </div>
@@ -318,10 +317,10 @@
             <div class="row input-group my-3 w-75 mx-auto">
                 <span
                     class="col-4 col-md-2 input-group-text border-end-0 text-end text-uppercase fw-bolder">Итого:</span>
-                <input type="text" class="col-8 col-md-8 form-control border-start-0 text-start total-counter"
+                <input type="text" class="col-8 col-md-8 form-control border-start-0 text-start total-counter fs-2"
                     value="0 руб." readonly>
                 <button type="button" class="col-12 col-md-2 mt-2 mt-md-0 btn btn-secondary btn-sm btn-danger fw-bolder"
-                    data-bs-toggle="modal" data-bs-target="#modal">Оформить
+                    data-bs-toggle="modal" data-bs-target="#modal" id="makeOrder">Оформить
                     заказ</button>
             </div>
         </section>
@@ -333,8 +332,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <h4>Позиции заказа</h4>
-                        <div class="card mb-3 template">
+                        <div class="card mb-3 d-none" id="order-template">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex flex-row align-items-center">
@@ -346,38 +344,44 @@
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-center">
-                                        <h5 class="fw-normal mb-0">... &#8381;</h5>
+                                        <h5 class="fw-normal mb-0" id="order-count">... &#8381;</h5>
                                     </div>
                                     <div class="d-flex align-items-center">
-                                        <h5 class="mb-0">... &#8381;</h5>
+                                        <h5 class="mb-0" id="order-total-count">... &#8381;</h5>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <h4>Дополнительные опции</h4>
-                        <ul class="list-unstyled">
+                        <h4>Позиции заказа</h4>
+                        <div class="" id="order">
+                            
+                        </div>
+                        <div class="d-none" id="modal-options">
+                            <h4>Дополнительные опции</h4>
+                            <ul class="list-unstyled mb-2">
+                                <li class="d-flex justify-content-between d-none" id="modal-rand-option">
+                                    <div>
+                                        <span>Хочу подарок</span>
+                                    </div>
+                                    <div>
+                                        <span>Активно</span>
+                                    </div>
+                                </li>
+                                <li class="d-flex justify-content-between d-none" id="modal-2-option">
+                                    <div>
+                                        <span>В два раза больше</span>
+                                    </div>
+                                    <div>
+                                        <span id="modal-cold">-20%</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <h4>Информация о заведении</h4>
+                        <ul class="list-unstyled" id="modal_data">
                             <li class="d-flex justify-content-between">
                                 <div>
-                                    <span>В два раза больше!</span>
-                                </div>
-                                <div>
-                                    <span id="modal-x2">Активно</span>
-                                </div>
-                            </li>
-                            <li class="d-flex justify-content-between">
-                                <div>
-                                    <span>Только горячим!</span>
-                                </div>
-                                <div>
-                                    <span id="modal-cold">Активно</span>
-                                </div>
-                            </li>
-                        </ul>
-                        <h4>Информация о предприятии</h4>
-                        <ul class="list-unstyled">
-                            <li class="d-flex justify-content-between">
-                                <div>
-                                    <p>Название предприятия:</p>
+                                    <p>Название заведения:</p>
                                 </div>
                                 <div>
                                     <p id="modal-name"></p>
@@ -388,7 +392,7 @@
                                     <p>Административный округ:</p>
                                 </div>
                                 <div>
-                                    <p id="modal-district"></p>
+                                    <p id="modal-area"></p>
                                 </div>
                             </li>
                             <li class="d-flex justify-content-between">
@@ -396,7 +400,7 @@
                                     <p>Район:</p>
                                 </div>
                                 <div>
-                                    <p id="modal-area"></p>
+                                    <p id="modal-district"></p>
                                 </div>
                             </li>
                             <li class="d-flex justify-content-between">
@@ -435,9 +439,10 @@
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label class="form-label col-lg-4" for="delivery-address">Стоимость доставки:</label>
+                                <label class="form-label col-lg-4" for="delivery-address">Стоимость
+                                    доставки:</label>
                                 <div class="col-lg-8">
-                                    <span id="modal-delivery-cost"> 0 руб. </span>
+                                    <span id="modal-delivery-cost"> 250 руб. </span>
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -452,14 +457,14 @@
                                 <h4>Итого:</h4>
                             </div>
                             <div class="col-lg-8">
-                                <h4><strong id="modal-total">100</strong> руб.</h4>
+                                <h4><strong id="modal-total">...</strong> руб.</h4>
                             </div>
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                        <button type="button" class="btn btn-primary">Подтвердить</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="modal-cancel-btn">Отмена</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="modal-confirm-btn">Подтвердить</button>
                     </div>
                 </div>
             </div>
