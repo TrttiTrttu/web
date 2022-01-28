@@ -26,7 +26,6 @@ function paginationBtnHandler(event) {
     let pages = Math.floor(json_filtred.length / 20);
     if (json_filtred.length % 20 != 0)
         pages++;
-    console.log(json_filtred.length);
 
     if (action_btn == '›' || action_btn == '»' || action_btn == '‹' || action_btn == '«') {
         if (action_btn == '‹') flag = -1;
@@ -74,7 +73,7 @@ function paginationBtnHandler(event) {
     }
     else if ((Number(current_page) + flag) == 49) {
         new_page = 49;
-        
+
         event.target.closest('.pagination').querySelector('.next').classList.remove('disabled');
         event.target.closest('.pagination').querySelector('.next_ten').classList.remove('disabled');
         event.target.closest('.pagination').querySelector('.back').classList.add('disabled');
@@ -169,97 +168,97 @@ function renderPaginationBtn(json) {
     document.querySelector('.third').querySelector('.pagination-btn').innerHTML = 3;
     document.querySelector('.fourth').querySelector('.pagination-btn').innerHTML = 4;
 
-let pages = Math.floor(json.length / 20);
-if (json.length % 20 != 0)
-    pages++;
-if (pages == 1) {
-    for (let btn of document.querySelectorAll('.page-item'))
-        btn.classList.add('d-none');
-}
-else if (pages == 2) {
-    for (let btn of document.querySelectorAll('.page-item'))
-        btn.classList.remove('d-none');
-    for (let btn of document.querySelectorAll('.page-item'))
-        btn.classList.add('d-none');
-    document.querySelector('.back').classList.remove('d-none');
-    document.querySelector('.first').classList.remove('d-none');
-    document.querySelector('.second').classList.remove('d-none');
-    document.querySelector('.next').classList.remove('d-none');
-}
-else if (pages == 3) {
-    for (let btn of document.querySelectorAll('.page-item'))
-        btn.classList.remove('d-none');
-    for (let btn of document.querySelectorAll('.page-item'))
-        btn.classList.add('d-none');
-    document.querySelector('.back').classList.remove('d-none');
-    document.querySelector('.first').classList.remove('d-none');
-    document.querySelector('.second').classList.remove('d-none');
-    document.querySelector('.third').classList.remove('d-none');
-    document.querySelector('.next').classList.remove('d-none');
-}
-else if (pages == 4) {
-    for (let btn of document.querySelectorAll('.page-item'))
-        btn.classList.remove('d-none');
-    for (let btn of document.querySelectorAll('.page-item'))
-        btn.classList.add('d-none');
-    document.querySelector('.back').classList.remove('d-none');
-    document.querySelector('.first').classList.remove('d-none');
-    document.querySelector('.second').classList.remove('d-none');
-    document.querySelector('.third').classList.remove('d-none');
-    document.querySelector('.fourth').classList.remove('d-none');
-    document.querySelector('.next').classList.remove('d-none');
-}
-else if (pages == 5) {
-    for (let btn of document.querySelectorAll('.page-item'))
-        btn.classList.remove('d-none');
-    for (let btn of document.querySelectorAll('.page-item'))
-        btn.classList.add('d-none');
-    document.querySelector('.back').classList.remove('d-none');
-    document.querySelector('.first').classList.remove('d-none');
-    document.querySelector('.second').classList.remove('d-none');
-    document.querySelector('.third').classList.remove('d-none');
-    document.querySelector('.fourth').classList.remove('d-none');
-    document.querySelector('.last').classList.remove('d-none');
-    document.querySelector('.next').classList.remove('d-none');
-}
-else if (pages == 6) {
-    for (let btn of document.querySelectorAll('.page-item'))
-        btn.classList.remove('d-none');
-    for (let btn of document.querySelectorAll('.page-item'))
-        btn.classList.add('d-none');
-    document.querySelector('.last').querySelector('a').innerHTML = pages;
-    document.querySelector('.back').classList.remove('d-none');
-    document.querySelector('.first').classList.remove('d-none');
-    document.querySelector('.second').classList.remove('d-none');
-    document.querySelector('.third').classList.remove('d-none');
-    document.querySelector('.fourth').classList.remove('d-none');
-    document.querySelector('.last').classList.remove('d-none');
-    document.querySelector('.next').classList.remove('d-none');
-    document.querySelector('.empty_end').classList.remove('d-none');
-}
-else if (pages > 6 && pages < 11) {
-    for (let btn of document.querySelectorAll('.page-item'))
-        btn.classList.remove('d-none');
-    for (let btn of document.querySelectorAll('.page-item'))
-        btn.classList.add('d-none');
-    document.querySelector('.last').querySelector('a').innerHTML = pages;
-    document.querySelector('.back').classList.remove('d-none');
-    document.querySelector('.first').classList.remove('d-none');
-    document.querySelector('.second').classList.remove('d-none');
-    document.querySelector('.third').classList.remove('d-none');
-    document.querySelector('.fourth').classList.remove('d-none');
-    document.querySelector('.last').classList.remove('d-none');
-    document.querySelector('.next').classList.remove('d-none');
-
-}
-else {
-    console.log('QWEQWEQWEQEQWEQWEQEQWEQEQEQEQWEWE');
-    document.querySelector('.last').querySelector('a').innerHTML = pages;
-    for (let btn of document.querySelectorAll('.page-item')) {
-        btn.classList.remove('d-none');
+    let pages = Math.floor(json.length / 20);
+    if (json.length % 20 != 0)
+        pages++;
+    if (pages == 1) {
+        for (let btn of document.querySelectorAll('.page-item'))
+            btn.classList.add('d-none');
     }
-    document.querySelector('.empty_start').classList.add('d-none');
-}
+    else if (pages == 2) {
+        for (let btn of document.querySelectorAll('.page-item'))
+            btn.classList.remove('d-none');
+        for (let btn of document.querySelectorAll('.page-item'))
+            btn.classList.add('d-none');
+        document.querySelector('.back').classList.remove('d-none');
+        document.querySelector('.first').classList.remove('d-none');
+        document.querySelector('.second').classList.remove('d-none');
+        document.querySelector('.next').classList.remove('d-none');
+    }
+    else if (pages == 3) {
+        for (let btn of document.querySelectorAll('.page-item'))
+            btn.classList.remove('d-none');
+        for (let btn of document.querySelectorAll('.page-item'))
+            btn.classList.add('d-none');
+        document.querySelector('.back').classList.remove('d-none');
+        document.querySelector('.first').classList.remove('d-none');
+        document.querySelector('.second').classList.remove('d-none');
+        document.querySelector('.third').classList.remove('d-none');
+        document.querySelector('.next').classList.remove('d-none');
+    }
+    else if (pages == 4) {
+        for (let btn of document.querySelectorAll('.page-item'))
+            btn.classList.remove('d-none');
+        for (let btn of document.querySelectorAll('.page-item'))
+            btn.classList.add('d-none');
+        document.querySelector('.back').classList.remove('d-none');
+        document.querySelector('.first').classList.remove('d-none');
+        document.querySelector('.second').classList.remove('d-none');
+        document.querySelector('.third').classList.remove('d-none');
+        document.querySelector('.fourth').classList.remove('d-none');
+        document.querySelector('.next').classList.remove('d-none');
+    }
+    else if (pages == 5) {
+        for (let btn of document.querySelectorAll('.page-item'))
+            btn.classList.remove('d-none');
+        for (let btn of document.querySelectorAll('.page-item'))
+            btn.classList.add('d-none');
+        document.querySelector('.back').classList.remove('d-none');
+        document.querySelector('.first').classList.remove('d-none');
+        document.querySelector('.second').classList.remove('d-none');
+        document.querySelector('.third').classList.remove('d-none');
+        document.querySelector('.fourth').classList.remove('d-none');
+        document.querySelector('.last').classList.remove('d-none');
+        document.querySelector('.next').classList.remove('d-none');
+    }
+    else if (pages == 6) {
+        for (let btn of document.querySelectorAll('.page-item'))
+            btn.classList.remove('d-none');
+        for (let btn of document.querySelectorAll('.page-item'))
+            btn.classList.add('d-none');
+        document.querySelector('.last').querySelector('a').innerHTML = pages;
+        document.querySelector('.back').classList.remove('d-none');
+        document.querySelector('.first').classList.remove('d-none');
+        document.querySelector('.second').classList.remove('d-none');
+        document.querySelector('.third').classList.remove('d-none');
+        document.querySelector('.fourth').classList.remove('d-none');
+        document.querySelector('.last').classList.remove('d-none');
+        document.querySelector('.next').classList.remove('d-none');
+        document.querySelector('.empty_end').classList.remove('d-none');
+    }
+    else if (pages > 6 && pages < 11) {
+        for (let btn of document.querySelectorAll('.page-item'))
+            btn.classList.remove('d-none');
+        for (let btn of document.querySelectorAll('.page-item'))
+            btn.classList.add('d-none');
+        document.querySelector('.last').querySelector('a').innerHTML = pages;
+        document.querySelector('.back').classList.remove('d-none');
+        document.querySelector('.first').classList.remove('d-none');
+        document.querySelector('.second').classList.remove('d-none');
+        document.querySelector('.third').classList.remove('d-none');
+        document.querySelector('.fourth').classList.remove('d-none');
+        document.querySelector('.last').classList.remove('d-none');
+        document.querySelector('.next').classList.remove('d-none');
+
+    }
+    else {
+        console.log('QWEQWEQWEQEQWEQWEQEQWEQEQEQEQWEWE');
+        document.querySelector('.last').querySelector('a').innerHTML = pages;
+        for (let btn of document.querySelectorAll('.page-item')) {
+            btn.classList.remove('d-none');
+        }
+        document.querySelector('.empty_start').classList.add('d-none');
+    }
 
 }
 
@@ -302,35 +301,75 @@ async function renderRestaurants(json, page_num = 0) {
     console.log(json.length, 'RESSSSTTTTTT')
     if (page_num < Math.floor(json.length / 20))
         for (let i = page_num * 20; i < (page_num * 20 + 20); i++) {
-            let newTaskElement = document.getElementById('restaurant-template').cloneNode(true);
-            newTaskElement.querySelector('.rest-name').innerHTML = json[i].name;
-            newTaskElement.querySelector('.rest-type').innerHTML = json[i].typeObject;
-            newTaskElement.querySelector('.rest-address').innerHTML = json[i].address;
-            newTaskElement.classList.remove('d-none');
+            let newRestaurantElement = document.getElementById('restaurant-template').cloneNode(true);
+            newRestaurantElement.querySelector('.rest-name').innerHTML = json[i].name;
+            newRestaurantElement.querySelector('.rest-type').innerHTML = json[i].typeObject;
+            newRestaurantElement.querySelector('.rest-address').innerHTML = json[i].address;
+            newRestaurantElement.classList.remove('d-none');
 
             let listElement = document.getElementById(`rest-list`);
-            listElement.append(newTaskElement);
+            listElement.append(newRestaurantElement);
+
+            let btn = newRestaurantElement.querySelector('.text-end');
+            btn.onclick = choiceBtnHandler;
+
+
         }
     else
         for (let i = page_num * 20; i < json.length; i++) {
-            let newTaskElement = document.getElementById('restaurant-template').cloneNode(true);
-            newTaskElement.querySelector('.rest-name').innerHTML = json[i].name;
-            newTaskElement.querySelector('.rest-type').innerHTML = json[i].typeObject;
-            newTaskElement.querySelector('.rest-address').innerHTML = json[i].address;
-            newTaskElement.classList.remove('d-none');
+            let newRestaurantElement = document.getElementById('restaurant-template').cloneNode(true);
+            newRestaurantElement.querySelector('.rest-name').innerHTML = json[i].name;
+            newRestaurantElement.querySelector('.rest-type').innerHTML = json[i].typeObject;
+            newRestaurantElement.querySelector('.rest-address').innerHTML = json[i].address;
+            newRestaurantElement.classList.remove('d-none');
 
             let listElement = document.getElementById(`rest-list`);
-            listElement.append(newTaskElement);
+            listElement.append(newRestaurantElement);
+
+            let btn = newRestaurantElement.querySelector('#btn-choice');
+            btn.onclick = choiceBtnHandler;
         }
 }
 
-
-
+function calcBtnHandler(event) {
+    let sign = event.target.innerHTML;
+    let field = event.target.closest('.row').querySelector('.rounded').value;
+    if (sign == '+')
+        event.target.closest('.row').querySelector('.rounded').value = Number(event.target.closest('.row').querySelector('.rounded').value) + 1;
+    else if (field != 0)
+        event.target.closest('.row').querySelector('.rounded').value = Number(event.target.closest('.row').querySelector('.rounded').value) - 1;
+}
 async function tasksJsonPreload() {
     json_copy = fetch(url + '?api_key=' + api_key)
         .then(res => res.json())
         .catch(err => showAlert(err, 'danger'));
     return json_copy
+}
+
+function renderPrice(name, address) {
+    let prices = [];
+    for (let el of json_filtred) {
+        if (el.name == name && el.address == address) {
+            for (let i = 1; i <= 10; i++) {
+                let set = 'prices.push(el.set_' + i + ');';
+                eval(set);
+            }
+        }
+    }
+
+    for (let i = 1; i < 11; i++) {
+        console.log(document.getElementById('1'));
+        let ids = 'document.getElementById(\'' + i + '\').querySelector(\'.card-price\').innerHTML = (prices[i-1] + \' ₽\')';
+        eval(ids);
+    }
+}
+
+function choiceBtnHandler(event) {
+    let name = event.target.closest('#restaurant-template').querySelector('.rest-name').innerHTML;
+    let address = event.target.closest('#restaurant-template').querySelector('.rest-address').innerHTML;
+
+    renderPrice(name, address);
+    console.log(name, address);
 }
 
 window.onload = function () {
@@ -340,6 +379,14 @@ window.onload = function () {
         .then(json_copy => renderRestaurants(json_copy));
 
     document.getElementById('find_btn').onclick = findBtnHahdler;
+
+    for (let btn of document.querySelectorAll('#choice-btn')) {
+        btn.onclick = choiceBtnHandler;
+    }
+
+    for (let btn of document.querySelectorAll('.calc-btn')) {
+        btn.onclick = calcBtnHandler;
+    }
 
     for (let btn of document.querySelectorAll('.pagination-btn')) {
         btn.onclick = paginationBtnHandler;
