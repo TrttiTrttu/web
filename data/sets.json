@@ -1,42 +1,52 @@
 [
     {
         "id": "set_1",
-        "name": "Сет 1. Десерт"
+        "name": "Сет 1. Завтрак",
+        "img": "images/tmpfood.png"
     },
     {
         "id": "set_2",
-        "name": "Сет 2. Завтрак"
+        "name": "Сет 2. Обед",
+        "img": "images/tmpfood.png"
     },
     {
         "id": "set_3",
-        "name": "Сет 3. Завтрак"
+        "name": "Сет 3. Ужин",
+        "img": "images/tmpfood.png"
     },
     {
         "id": "set_4",
-        "name": "Сет 4. Обед"
+        "name": "Сет 4. Завтрак",
+        "img": "images/tmpfood.png"
     },
     {
         "id": "set_5",
-        "name": "Сет 5. Обед"
+        "name": "Сет 5. Обед",
+        "img": "images/tmpfood.png"
     },
     {
         "id": "set_6",
-        "name": "Сет 6. Десерт"
+        "name": "Сет 6. Ужин",
+        "img": "images/tmpfood.png"
     },
     {
         "id": "set_7",
-        "name": "Сет 7. Завтрак"
+        "name": "Сет 7. Обед",
+        "img": "images/tmpfood.png"
     },
     {
         "id": "set_8",
-        "name": "Сет 8. Обед"
+        "name": "Сет 8. Обед",
+        "img": "images/tmpfood.png"
     },
     {
         "id": "set_9",
-        "name": "Сет 9. Обед"
+        "name": "Сет 9. Обед",
+        "img": "images/tmpfood.png"
     },
     {
         "id": "set_10",
-        "name": "Сет 10. Десерт"
+        "name": "Сет 10. Завтрак",
+        "img": "images/tmpfood.png"
     }
 ]

@@ -2,6 +2,7 @@
 
 let api_key = '9d2427f4-8d5f-47be-888b-0159c5a73edb'
 let url = new URL('http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants')
+let menu_url = new URL('http://menuexam.std-1695.ist.mospolytech.ru/sets.json');
 let json_copy, json_filtred
 
 
@@ -14,6 +15,12 @@ function showAlert(msg, category = 'success') {
     alertsContainer.append(newAlertElement);
 }
 
+function hidePreloadElements() {
+    for (let el of document.querySelectorAll('.preload-hide'))
+        if (!el.classList.contains('d-none'))
+            el.classList.add('d-none')
+}
+
 function paginationBtnHandler(event) {
     let action_btn = event.target.innerHTML;
     let current_page = event.target.closest('.pagination').querySelector('.active').querySelector('.pagination-btn').innerHTML;
@@ -22,6 +29,8 @@ function paginationBtnHandler(event) {
     let fourth_btn = event.target.closest('.pagination').querySelector('.fourth')
     let flag = 1;
     let new_page = 0;
+
+    hidePreloadElements();
 
     let pages = Math.floor(json_filtred.length / 20);
     if (json_filtred.length % 20 != 0)
@@ -268,7 +277,7 @@ function findBtnHahdler(event) {
     let discont = event.target.closest('form').elements['discont'].value;
     let rtn = [];
 
-
+    hidePreloadElements();
 
     for (let i = 0; i < json_copy.length; i++) {
         let flag = true;
@@ -336,7 +345,11 @@ function calcBtnHandler(event) {
         event.target.closest('.row').querySelector('.rounded').value = Number(event.target.closest('.row').querySelector('.rounded').value) + 1;
     else if (field != 0)
         event.target.closest('.row').querySelector('.rounded').value = Number(event.target.closest('.row').querySelector('.rounded').value) - 1;
+
+    renderTotalAmount()
 }
+
+
 async function tasksJsonPreload() {
     json_copy = fetch(url + '?api_key=' + api_key)
         .then(res => res.json())
@@ -344,26 +357,62 @@ async function tasksJsonPreload() {
     return json_copy
 }
 
+function renderTotalAmount() {
+    let sum = 0;
+    for (let el of document.querySelectorAll('.card-counter')) {
+        let cardPrice = el.closest('.card-body').querySelector('.card-price').innerHTML;
+        cardPrice = cardPrice.slice(0, cardPrice.indexOf('₽') - 1);
+        if (el.value != 0) sum += Number(el.value) * cardPrice
+    }
+
+    document.querySelector('.total-counter').value = sum + ' ₽';
+}
+
+async function renderMenuCards() {
+    let menu;
+    await fetch(menu_url)
+        .then(res => res.json())
+        .then(json => menu = json)
+        .catch(err => showAlert(err, 'danger'));
+    // console.log(menu, 'CARDS');
+    for (let i = 0; i < menu.length; i++) {
+        let newCardElement = document.querySelector('#card-template').cloneNode(true);
+        newCardElement.querySelector('.card-img-top').src = menu[i].img;
+        console.log(newCardElement.querySelector('.card-img-top'), 'MENUUUUU');
+    }
+}
+
 function renderPrice(name, address) {
-    for (let el of document.querySelectorAll('#restaurant-template'))
-        if (el.classList.contains('table-active') && el.querySelector('.rest-address').innerHTML != address)
-            el.classList.remove('table-active')
+    renderMenuCards()
 
-    let prices = [];
-    for (let el of json_filtred) {
-        // console.log(name, 'rest-name');
-        if (el.name == name && el.address == address) {
-            for (let i = 1; i <= 10; i++) {
-                let set = 'prices.push(el.set_' + i + ');';
-                eval(set);
-            }
-        }
-    }
+    // for (let el of document.querySelectorAll('.card-counter')) {
+    //     el.value = 0;
+    // }
 
-    for (let i = 1; i < 11; i++) {
-        let ids = 'document.getElementById(\'' + i + '\').querySelector(\'.card-price\').innerHTML = (prices[i-1] + \' ₽\')';
-        eval(ids);
-    }
+    // for (let el of document.querySelectorAll('#restaurant-template'))
+    //     if (el.classList.contains('table-active') && el.querySelector('.rest-address').innerHTML != address)
+    //         el.classList.remove('table-active')
+
+    // for (let el of document.querySelectorAll('.preload-hide'))
+    //     if (el.classList.contains('d-none'))
+    //         el.classList.remove('d-none')
+
+    // let prices = [];
+    // for (let el of json_filtred) {
+    //     if (el.name == name && el.address == address) {
+    //         for (let i = 1; i <= 10; i++) {
+    //             let set = 'prices.push(el.set_' + i + ');';
+    //             eval(set);
+    //         }
+    //     }
+    // }
+
+    // for (let i = 1; i < 11; i++) {
+    //     let ids = 'document.getElementById(\'' + i + '\').querySelector(\'.card-price\').innerHTML = (prices[i-1] + \' ₽\')';
+    //     eval(ids);
+    // }
+
+    // renderTotalAmount();
 }
 
 function choiceBtnHandler(event) {
@@ -372,13 +421,10 @@ function choiceBtnHandler(event) {
         str = str.slice(0, str.indexOf('&') + 1) + str.slice(str.indexOf('&') + 5, str.length);
     }
 
-    console.log(str);
-
     let name = str;
     let address = event.target.closest('#restaurant-template').querySelector('.rest-address').innerHTML;
     event.target.closest('#restaurant-template').classList.add('table-active');
     renderPrice(name, address);
-    console.log(name, address);
 }
 
 window.onload = function () {
