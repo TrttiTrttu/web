@@ -85,7 +85,6 @@ function paginationBtnHandler(event) {
     }
     else {
         new_page = (Number(current_page) + flag);
-        console.log(new_page, 'NEWPAGE');
         if (new_page >= (pages - 10)) {
             event.target.closest('.pagination').querySelector('.next_ten').classList.add('disabled');
         }
@@ -171,7 +170,7 @@ function renderPaginationBtn(json) {
     let pages = Math.floor(json.length / 20);
     if (json.length % 20 != 0)
         pages++;
-    if (pages == 1) {
+    if (pages == 1 || pages == 0) {
         for (let btn of document.querySelectorAll('.page-item'))
             btn.classList.add('d-none');
     }
@@ -298,7 +297,6 @@ function rateSort(json) {
 
 async function renderRestaurants(json, page_num = 0) {
     document.getElementById('rest-list').innerHTML = '';
-    console.log(json.length, 'RESSSSTTTTTT')
     if (page_num < Math.floor(json.length / 20))
         for (let i = page_num * 20; i < (page_num * 20 + 20); i++) {
             let newRestaurantElement = document.getElementById('restaurant-template').cloneNode(true);
@@ -326,7 +324,7 @@ async function renderRestaurants(json, page_num = 0) {
             let listElement = document.getElementById(`rest-list`);
             listElement.append(newRestaurantElement);
 
-            let btn = newRestaurantElement.querySelector('#btn-choice');
+            let btn = newRestaurantElement.querySelector('.text-end');
             btn.onclick = choiceBtnHandler;
         }
 }
@@ -347,8 +345,13 @@ async function tasksJsonPreload() {
 }
 
 function renderPrice(name, address) {
+    for (let el of document.querySelectorAll('#restaurant-template'))
+        if (el.classList.contains('table-active') && el.querySelector('.rest-address').innerHTML != address)
+            el.classList.remove('table-active')
+
     let prices = [];
     for (let el of json_filtred) {
+        // console.log(name, 'rest-name');
         if (el.name == name && el.address == address) {
             for (let i = 1; i <= 10; i++) {
                 let set = 'prices.push(el.set_' + i + ');';
@@ -358,16 +361,22 @@ function renderPrice(name, address) {
     }
 
     for (let i = 1; i < 11; i++) {
-        console.log(document.getElementById('1'));
         let ids = 'document.getElementById(\'' + i + '\').querySelector(\'.card-price\').innerHTML = (prices[i-1] + \' ₽\')';
         eval(ids);
     }
 }
 
 function choiceBtnHandler(event) {
-    let name = event.target.closest('#restaurant-template').querySelector('.rest-name').innerHTML;
-    let address = event.target.closest('#restaurant-template').querySelector('.rest-address').innerHTML;
+    let str = event.target.closest('#restaurant-template').querySelector('.rest-name').innerHTML;
+    if (str.indexOf('&') != -1) {
+        str = str.slice(0, str.indexOf('&') + 1) + str.slice(str.indexOf('&') + 5, str.length);
+    }
 
+    console.log(str);
+
+    let name = str;
+    let address = event.target.closest('#restaurant-template').querySelector('.rest-address').innerHTML;
+    event.target.closest('#restaurant-template').classList.add('table-active');
     renderPrice(name, address);
     console.log(name, address);
 }
