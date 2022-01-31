@@ -347,7 +347,6 @@ function calcBtnHandler(event) {
     renderTotalAmount()
 }
 
-
 async function tasksJsonPreload() {
     json_copy = fetch(url + '?api_key=' + api_key)
         .then(res => res.json())
@@ -517,8 +516,9 @@ function getRandomInt(max) {
 function modalRandOption(counts) {
     let randNum;
     if (counts == 1) randNum = 1;
-    else randNum = getRandomInt(Number(counts));
+    else randNum = getRandomInt(Number(counts)) + 1;
 
+    console.log(randNum, 'Rand');
     let counter = 0;
     for (let el of document.querySelector('#order').querySelectorAll('#order-template')) {
         counter++;
