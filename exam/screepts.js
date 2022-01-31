@@ -1,4 +1,4 @@
- 'use strict';
+'use strict';
 
 let api_key = '9d2427f4-8d5f-47be-888b-0159c5a73edb'
 let url = new URL('http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants')
@@ -288,7 +288,7 @@ function findBtnHahdler(event) {
 
         if (flag) rtn.push(json_copy[i]);
     }
-    json_filtred = rtn; 
+    json_filtred = rtn;
     renderPaginationBtn(rtn);
     renderRestaurants(rtn);
 
@@ -482,8 +482,6 @@ function renderModalOptions() {
         document.getElementById('modal-2-option').classList.add('d-none');
 }
 
-
-
 function renderModalOrder() {
     let orderElement = document.getElementById('order');
     orderElement.innerHTML = '';
@@ -545,7 +543,8 @@ function renderTotal(coef) {
         price = price.slice(0, price.length - 2);
         sum += Number(price);
     }
-    sum = (sum/2 * coef) + 250;
+    console.log(sum, 'totalsum');
+    sum = (sum * coef) + 250;
     document.querySelector('#modal-total').innerHTML = sum.toFixed(2);
 }
 
@@ -558,7 +557,7 @@ function makeOrderBtnHandler() {
     let coef = 1;
 
     if (document.getElementById('2-option').checked) {
-        coef = 1.6;
+        coef = 0.8;
     }
 
     renderTotal(coef);
