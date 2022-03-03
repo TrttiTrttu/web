@@ -20,3 +20,18 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+file = open('./CAM_table.txt', 'r', encoding='UTF-8')
+res = ''
+
+tmp = """
+{:<7}{:14}   {}
+"""
+for line in file:
+    if (line == '\n' or line == ''): 
+        continue
+    if (line[1].isdigit()):
+        line = line.replace('DYNAMIC', '')
+        line = line.split()
+        res += tmp.format(line[0], line[1], line[2])
+
+print(res.replace('\n\n', '\n'))

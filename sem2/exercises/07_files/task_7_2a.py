@@ -15,5 +15,23 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+from sys import argv
 
 ignore = ["duplex", "alias", "configuration"]
+
+name = argv[1]
+
+res = ''
+
+file = open(f'{name}', 'r', encoding='UTF-8')
+
+for line in file:
+    if (line.startswith('!')):
+        continue
+    else:
+        if (set(line.split()) & set(ignore)):
+            continue
+        else:
+            res += line
+
+print(res)
