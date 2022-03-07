@@ -80,3 +80,22 @@ infiles = [
     "sh_cdp_n_r2.txt",
     "sh_cdp_n_r3.txt",
 ]
+import os
+os.environ["PATH"] += os.pathsep + 'D:/Graphviz/bin' #путь чтобы работал graphviz
+
+from draw_network_graph import draw_topology
+from task_11_2 import create_network_map
+
+def unique_network_map(topology_dict):
+    res = []
+
+    for i in topology_dict.values():
+        if i in topology_dict.keys() and topology_dict[i] not in res:
+            res.append(i)
+
+    [topology_dict.pop(key) for key in res]
+
+    return topology_dict
+
+if __name__ == "__main__":
+    draw_topology(unique_network_map(create_network_map(infiles)))

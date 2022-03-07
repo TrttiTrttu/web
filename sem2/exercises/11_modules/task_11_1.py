@@ -43,7 +43,24 @@ def parse_cdp_neighbors(command_output):
     и с файлами и с выводом с оборудования.
     Плюс учимся работать с таким выводом.
     """
+    table_length = command_output.find('Port ID') + len('Port ID') + 1 - command_output.find('Device ID')
+    lcl_device = command_output[:command_output.find('>')].strip()
+    command_output = command_output[command_output.find('Device ID'):]
+    num_of_devices = len(command_output)//table_length - 1
+    dst_devices = []
+    lcl_intf = []
+    dst_intf = []
+    res = {}
 
+    for i in range(1, num_of_devices + 1):
+        dst_devices.append(command_output[(command_output.find('Device ID') + table_length ) * i:(command_output.find('Device ID') + table_length) * i + 5].strip())
+        lcl_intf.append(command_output[command_output.find('Local Intrfce') + (table_length * i):command_output.find('Local Intrfce') + (table_length * i) + 10].strip().replace(' ',''))
+        dst_intf.append(command_output[command_output.find('Port ID') + (table_length * i):command_output.find('Port ID') + (table_length * i) + 8].strip().replace(' ',''))
+    
+    for i in range(num_of_devices):
+        res[(lcl_device, lcl_intf[i])] = (dst_devices[i], dst_intf[i])
+
+    return res
 
 if __name__ == "__main__":
     with open("sh_cdp_n_sw1.txt") as f:
