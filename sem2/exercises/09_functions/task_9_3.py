@@ -23,3 +23,22 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+
+
+def get_int_vlan_map(config_filename):
+    d_access = {}
+    d_trunk = {}
+    with open(config_filename, 'r') as file:
+        intf = ''
+        for line in file.read().split('\n'): 
+            if line.find('interface') != -1:
+                intf = line[line.find(' ') + 1:]
+                continue
+            if line.find('trunk allowed') != -1:
+                d_trunk[intf] = list(map(int, line[line.rfind(' ') + 1:].split(',')))
+            elif line.find('access vlan') != -1:
+                d_access[intf] = list(map(int, line[line.rfind(' ') + 1:].split(',')))
+    
+    return (d_access, d_trunk)
+
+print(get_int_vlan_map('config_sw1.txt'))

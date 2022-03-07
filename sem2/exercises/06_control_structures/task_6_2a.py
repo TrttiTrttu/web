@@ -34,7 +34,7 @@ for i in ip_addr:
         break
 
 if (flag):
-    print('Неправильный IP-адрес')
+    print('Неправильный ip')
 
 else:
     if 1 < int(ip_addr[0]) < 223:

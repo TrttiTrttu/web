@@ -61,18 +61,16 @@ trunk_config_2 = {
     "FastEthernet0/14": [117],
 }
 
-def generate_access_config(intf_vlan_mapping, access_template, psecurity=None):
+def generate_trunk_config(intf_vlan_mapping, trunk_template):
 
     res = []
     for int, vlan_id in intf_vlan_mapping.items():
         res.append(f'interface {int}')
-        for i in access_template:
+        for i in trunk_template:
             if i == "switchport trunk allowed vlan":
-                res.append(f'{i} {", ".join(map(str, vlan_id))}')
+                res.append(f'{i} {",".join(map(str, vlan_id))}')
             else:
                 res.append(i)
-        if psecurity is not psecurity:
-            res += psecurity
     return res
 
-print (generate_access_config (trunk_config, trunk_mode_template))
+print (generate_trunk_config(trunk_config_2, trunk_mode_template ))
