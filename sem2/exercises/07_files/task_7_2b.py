@@ -26,13 +26,10 @@ res = ''
 file = open(f'{name}', 'r', encoding='UTF-8')
 
 for line in file:
-    if (line.startswith('!')):
+    if (line.startswith('!')) or (set(ignore) & set(line.split())):
         continue
     else:
-        if (set(ignore) & set(line.split())):
-            continue
-        else:
-            res += line
+         res += line
 
 out = open(f'./{argv[2]}', 'w')
 
