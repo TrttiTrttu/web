@@ -34,3 +34,4 @@ for line in file:
 out = open(f'./{argv[2]}', 'w')
 
 out.write(res)
+file.close()

@@ -40,5 +40,5 @@ res_list.sort()
 
 for i in res_list:
     res += tmp.format(i[0], i[1], i[2])
-
+file.close()
 print(res.replace('\n\n', '\n'))

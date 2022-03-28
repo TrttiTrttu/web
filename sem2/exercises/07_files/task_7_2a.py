@@ -33,5 +33,5 @@ for line in file:
             continue
         else:
             res += line
-
+file.close()
 print(res)

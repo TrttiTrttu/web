@@ -33,5 +33,5 @@ for line in file:
         line = line.replace('DYNAMIC', '')
         line = line.split()
         res += tmp.format(line[0], line[1], line[2])
-
+file.close()
 print(res.replace('\n\n', '\n'))

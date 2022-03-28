@@ -33,3 +33,5 @@ for line in file:
     ospf[2] = ospf[2].strip(',')
     ospf[3] = ospf[3].strip(',')
     print(tmp.format(ospf[0], ospf[1], ospf[2], ospf[3], ospf[4]))
+
+file.close()
