@@ -46,6 +46,9 @@
             <li class="nav-item">
               <a class="nav-link {% if request.endpoint == 'form' %}active{% endif %}" aria-current="page" href="{{ url_for('form') }}">Формы</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link {% if request.endpoint == 'phone' %}active{% endif %}" aria-current="page" href="{{ url_for('phone') }}">Телефон</a>
+            </li>
           </ul>
         </div>
       </div>

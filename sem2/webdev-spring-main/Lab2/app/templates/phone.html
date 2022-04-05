@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="POST">
+        <input {% if error_msg %} class="is-invalid" {% endif %}type="text" name="phonenumber" id="phonenumber" 
+        placeholder="Введите номер телефона" value="{{ request.form.phonenumber }}">
+        <button type="submit" class="btn btn-primary">Проверить</button>
+        <div id="phonenumber" class="invalid-feedback">
+            Пожалуйста введите номер верно.
+          </div>
+        {% if request.method == 'POST' and not error_msg %}
+        <p>{{ result }}</p>
+        {% endif %}
+    </form>
+    {% if request.method == 'POST' and error_msg %} 
+        <p style="color: red;">{{ error_msg }}</p>
+    {% endif %}
+{% endblock %}
