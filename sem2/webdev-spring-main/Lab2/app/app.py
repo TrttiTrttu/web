@@ -49,21 +49,23 @@ def cookies():
     return response
 
 def check_number(number, error_msg):
-    dig_counter = 0
-    digits_list = []
-    number = number.replace('+7','8')
-    if (number[0] == '8'):
-        number = number[1:]
-    for symb in number:
-        if symb in ALLOWED_SYMBOLS:
-            if symb.isdigit():
-                dig_counter += 1
-                digits_list.append(symb)
-        else:
-            error_msg = 'Недопустимый ввод. B номере телефона встречаются недопустимые символы. '
-    if (len(digits_list) != 10):
-        error_msg += 'Недопустимый ввод. Неверное количество цифр.'
-    result = '8-' + ''.join(digits_list[0:3]) + '-' + ''.join(digits_list[3:6]) + '-' + ''.join(digits_list[6:8]) + '-' + ''.join(digits_list[8:])
+    result = ''
+    if (len(number) != 0):
+        dig_counter = 0
+        digits_list = []
+        number = number.replace('+7','8')
+        if (number[0] == '8'):
+            number = number[1:]
+        for symb in number:
+            if symb in ALLOWED_SYMBOLS:
+                if symb.isdigit():
+                    dig_counter += 1
+                    digits_list.append(symb)
+            else:
+                error_msg = 'Недопустимый ввод. B номере телефона встречаются недопустимые символы. '
+        if (len(digits_list) != 10):
+            error_msg += 'Недопустимый ввод. Неверное количество цифр.'
+        result = '8-' + ''.join(digits_list[0:3]) + '-' + ''.join(digits_list[3:6]) + '-' + ''.join(digits_list[6:8]) + '-' + ''.join(digits_list[8:])
     return result, error_msg
 
 
@@ -71,7 +73,7 @@ def check_number(number, error_msg):
 @app.route('/phone', methods=['GET','POST'])
 def phone():
     result = ''
-    error_msg = ''
+    error_msg = '' 
     if request.method == 'POST':
         result,error_msg = check_number(request.form.get('phonenumber'),error_msg)
         
