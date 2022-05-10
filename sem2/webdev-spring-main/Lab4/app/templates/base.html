@@ -9,6 +9,7 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   <title>
     {% if title %}
     {{ title }}
@@ -18,7 +19,7 @@
   </title>
 </head>
 
-<body>
+<body class="d-flex flex-column">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="{{ url_for('index') }}">Лабораторная работа 4</a>
@@ -34,6 +35,9 @@
           <li class="nav-item">
             {% if current_user.is_authenticated %}
                 <a class="nav-link" aria-current="page" href="{{ url_for('logout') }}">Выйти</a>
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="{{ url_for('changepswd') }}">Сменить пароль</a>
+                </li>
             {% else %}
                 <a class="nav-link {% if request.endpoint == 'login' %}active{% endif %}" aria-current="page" href="{{ url_for('login') }}">Войти</a>
             {% endif %}
@@ -59,17 +63,24 @@
       {% endwith %}
   </div>
 
-  <main>
+  <main class="my-3 flex-grow-1">
     <div class="container">
       {% block content %}
-      <h1>Содержимое по-умолчанию</h1>
+      <h1>Содержимое по умолчанию</h1>
       {% endblock %}
     </div>
   </main>
 
+  <footer class="py-3 mt-4 bg-dark">
+    <div class="d-flex align-items-center justify-content-center">
+      <span class="text-muted">201-351 Летов Григорий Васильевич</span>
+    </div>
+  </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>
 
 </html>
