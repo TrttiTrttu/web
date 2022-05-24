@@ -1,5 +1,6 @@
 from flask import Flask, redirect, render_template, request, session, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required
+
 login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.login_message = 'Для достпуа к данной странице необходимо пройти процеуру аутентификации'
