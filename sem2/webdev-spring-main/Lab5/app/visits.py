@@ -1,8 +1,9 @@
-from fileinput import filename
 import math
 import io
 import datetime
+from auth import check_rights
 from flask import Blueprint, render_template, request, redirect, url_for, flash, send_file
+from flask_login import login_required, current_user
 from app import mysql
 
 
@@ -24,20 +25,41 @@ def generate_report(records):
     return buffer
 
 @bp.route('/logs')
+@login_required
 def logs():
     page = request.args.get('page', 1, type=int)
+    
+    if current_user.can('view_logs'):
+        current_query = ('SELECT COUNT(*) AS count from visit_logs')
+        query = ('SELECT visit_logs.*, users.last_name, users.first_name, users.middle_name' 
+                ' FROM visit_logs LEFT JOIN users ON visit_logs.user_id = users.id' 
+                ' ORDER BY visit_logs.created_at DESC' 
+                ' LIMIT %s'
+                ' OFFSET %s;')
+    else:
+        current_query = (f'SELECT COUNT(*) AS count from visit_logs WHERE user_id = {current_user.id}')
+        query = ('SELECT visit_logs.*, users.last_name, users.first_name, users.middle_name' 
+                ' FROM visit_logs LEFT JOIN users ON visit_logs.user_id = users.id'
+               f' WHERE users.id = {current_user.id}' 
+                ' ORDER BY visit_logs.created_at DESC' 
+                ' LIMIT %s'
+                ' OFFSET %s;')
+
     with mysql.connection.cursor(named_tuple=True) as cursor:
-        cursor.execute(('SELECT COUNT(*) AS count FROM visit_logs;'))
-        total_count = cursor.fetchone().count
-    total_pages = math.ceil( total_count/PER_PAGE)
-    with mysql.connection.cursor(named_tuple=True) as cursor:
-        cursor.execute(('SELECT visit_logs.*, users.last_name, users.first_name, users.middle_name '
-                        'FROM visit_logs LEFT JOIN users ON visit_logs.user_id = users.id ORDER BY visit_logs.created_at DESC '
-                        'LIMIT %s OFFSET %s;'), (PER_PAGE, PER_PAGE*(page - 1)))
+        cursor.execute(query, (PER_PAGE, PER_PAGE*(page-1)))
         records = cursor.fetchall()
+
+    with mysql.connection.cursor(named_tuple=True) as cursor:
+        cursor.execute(current_query)
+        total_count = cursor.fetchone().count
+
+    total_pages = math.ceil(total_count/PER_PAGE)
+
     return render_template('visits/logs.html', records=records, page=page, total_pages=total_pages)
 
 @bp.route('/stats/users')
+@check_rights('view_logs')
+@login_required
 def users_stat():
     query = ('SELECT users.last_name, users.first_name, users.middle_name, COUNT(*) AS count '
             'FROM users RIGHT JOIN visit_logs ON visit_logs.user_id = users.id '
@@ -56,6 +78,8 @@ def users_stat():
     return render_template('visits/users_stat.html', records=records)
 
 @bp.route('/stats/pages')
+@check_rights('view_logs')
+@login_required
 def pages_stat():
     query = ('SELECT DISTINCT(path), COUNT(*) as count FROM visit_logs ' 
             'GROUP BY path '

@@ -1,5 +1,3 @@
-from email import message
-from urllib import request
 from flask import Flask, render_template, session, request, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from mysql_db import MySQL
@@ -219,8 +217,8 @@ def check_login(login):
 
     if login is None:
         return "Логин не может быть пустым"
-    if len(login) < 5 or login is None:
-        return "Длинна логина должна быть не менее 5 символов"
+    if len(login) < 5:
+        return "Длина логина должна быть не менее 5 символов"
 
     for char in login:
         if allowedChars.find(char) == -1:
