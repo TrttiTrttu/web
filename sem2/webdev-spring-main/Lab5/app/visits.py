@@ -55,7 +55,7 @@ def logs():
 
     total_pages = math.ceil(total_count/PER_PAGE)
 
-    return render_template('visits/logs.html', records=records, page=page, total_pages=total_pages)
+    return render_template('visits/logs.html', records=records, page=page, total_pages=total_pages, user=current_user)
 
 @bp.route('/stats/users')
 @check_rights('view_logs')
@@ -75,7 +75,7 @@ def users_stat():
         filename = datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S') + '_users_stat.csv'
         return send_file(f, mimetype='text/csv', as_attachment=True, attachment_filename=filename)
    
-    return render_template('visits/users_stat.html', records=records)
+    return render_template('visits/users_stat.html', records=records, user=current_user)
 
 @bp.route('/stats/pages')
 @check_rights('view_logs')
@@ -94,4 +94,4 @@ def pages_stat():
         filename = datetime.datetime.now().strftime('%d_%m_%y_%H_%M_%S') + '_pages_stat.csv'
         return send_file(f, mimetype='text/csv', as_attachment=True, attachment_filename=filename)
 
-    return render_template('visits/pages_stat.html', records=records)
+    return render_template('visits/pages_stat.html', records=records, user=current_user)

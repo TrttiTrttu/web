@@ -203,9 +203,9 @@ def changepswd():
 def check_input_data(params):
     error = {'login': None, 'password': None,'first_name': None, 'last_name': None}
 
-    if params.get('login') is not None and params.get('password') is not None:
-        error['login'] = check_login(params['login'])
-        error['password'] = check_password(params['password'])
+    # if params.get('login') is not None and params.get('password') is not None:
+    error['login'] = check_login(params['login'])
+    error['password'] = check_password(params['password'])
     error['first_name'] = check_first_name(params['first_name'])
     error['last_name'] = check_last_name(params['last_name'])
 
@@ -243,8 +243,9 @@ def check_last_name(last_name):
 
 def check_password(password):
     allowedChars = "abcdefghijklmnopqrstuvwxyzабвгдеёжзийклмнопрстуфхцчшщъыьэюя1234567890~!?@#$%^&*_-+()[]{>}</\|\"\'.,:;"
-
-    if len(password) < 8 or len(password) > 128 or password is None:
+    if password is None:
+        return "Длина пароля от 8 до 128 символов"
+    if len(password) < 8 or len(password) > 128:
         return "Длина пароля от 8 до 128 символов"
 
     for char in password:

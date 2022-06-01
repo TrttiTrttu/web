@@ -4,6 +4,7 @@ from app import db
 import sqlalchemy as sa
 from flask_login import UserMixin
 import os
+from flask import url_for
 
 class Category(db.Model):
     __tablename__ = 'categories'
@@ -84,6 +85,10 @@ class Image(db.Model):
     def storage_filename(self):
         _, ext = os.path.splitext(self.file_name)
         return self.id + ext
+
+    @property
+    def url(self):
+        return url_for('image', image_id=self.id)
 
     def __repr__(self):
         return 'Image %r' % self.file_name
