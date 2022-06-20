@@ -14,7 +14,7 @@
             </select>
         </div>
 
-        <div class="col-md-2 my-3 align-self-end">
+        <div class="col-md-4 my-3 align-self-end">
             <button type="submit" class="btn btn-dark w-100 mt-auto">Применить</button>
         </div>
     </form>
@@ -49,30 +49,34 @@
     {% endif %}
 
     {% if not user_review and current_user.is_authenticated %}
-    <h2>Оставить отзыв</h2>
+    <h2 class="text-center mt-5">Оставить отзыв</h2>
 
     <form class="mb-5 mt-3 row align-items-center" method="post" action="{{ url_for('courses.create_review', course_id = course.id) }}">
-        <div class="col-md-4 my-3">
-            <select class="form-select" id="review-rating" name="review-rating" title="Рейтинг">
-                <option value="5" selected>Отлично</option>
-                <option value="4">Хорошо</option>
-                <option value="3">Удовлетворительно</option>
-                <option value="2">Неудовлетворительно</option>
-                <option value="1">Плохо</option>
-                <option value="0">Ужасно</option>
-            </select>
-        </div>
+        <div class="container">
+            <div class="row">
+                <div class="my-3 col-4">
+                    <select class="form-select" id="review-rating" name="review-rating" title="Рейтинг">
+                        <option value="5" selected>Отлично</option>
+                        <option value="4">Хорошо</option>
+                        <option value="3">Удовлетворительно</option>
+                        <option value="2">Неудовлетворительно</option>
+                        <option value="1">Плохо</option>
+                        <option value="0">Ужасно</option>
+                    </select>
+                </div>
+        
+                <div class="my-3 col-8">
+                    <textarea class="form-text container-fluid" name="review-text" rows="10" id="review-text"></textarea>
+                </div>
+            </div>
 
-        <div class="col-md-4 my-3">
-            <textarea class="form-text" name="review-text" id="review-text"></textarea>
-        </div>
-
-        <div class="col-md-2 my-3 align-self-end">
-            <button type="submit" class="btn btn-dark w-100 mt-auto">Отправить</button>
-        </div>
+            <div class="col-md-2 my-3 align-self-end">
+                <button type="submit" class="btn btn-dark w-100 mt-auto">Отправить</button>
+            </div>
+        </div>    
     </form>
     {% elif user_review %}
-    <h2>Ваш отзыв</h2>
+    <h2 class="text-center mt-5">Ваш отзыв</h2>
     <table class="table">
         <thead>
             <tr>

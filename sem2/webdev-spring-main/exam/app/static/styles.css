@@ -1,0 +1,13 @@
+.logo {
+    max-height: 50px;
+    max-width: 50px;
+}
+
+.profile {
+    max-width: 45px;
+}
+
+.background-preview {
+    border: 3px dashed grey;
+    flex-grow: 1;
+}

@@ -4,7 +4,7 @@
     <div class="row mb-3">
         <label for="login" class="col-sm-2 col-form-label">Логин</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control {% if errors['login'] is not none %} is-invalid {% endif %}" name="login"
+            <input type="text" class="form-control {% if errors['login'] %} is-invalid {% endif %}" name="login"
                 id="login" aria-describedby="loginValid" value="{{ user.login or '' }}">
             <div id="loginValid" class="invalid-feedback">
                 {{ errors['login'] }}
@@ -14,7 +14,7 @@
     <div class="row mb-3">
         <label for="password" class="col-sm-2 col-form-label">Пароль</label>
         <div class="col-sm-10">
-            <input type="password" class="form-control {% if errors['password'] is not none %} is-invalid {% endif %}"
+            <input type="password" class="form-control {% if errors['password'] %} is-invalid {% endif %}"
                 name="password" id="password" aria-describedby="passwordValid" value="{{ user.password or '' }}">
             <div id="passwordValid" class="invalid-feedback">
                 {{ errors['password'] }}

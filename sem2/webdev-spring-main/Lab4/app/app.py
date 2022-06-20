@@ -203,7 +203,6 @@ def changepswd():
 def check_input_data(params):
     error = {'login': None, 'password': None,'first_name': None, 'last_name': None}
 
-    # if params.get('login') is not None and params.get('password') is not None:
     error['login'] = check_login(params['login'])
     error['password'] = check_password(params['password'])
     error['first_name'] = check_first_name(params['first_name'])
@@ -235,9 +234,9 @@ def check_first_name(first_name):
 
 
 def check_last_name(last_name):
-    if last_name is None:
-        return "Поле не должно быть пустым"
-    if len(last_name) == 0:
+    # if last_name is None:
+    #     return "Поле не должно быть пустым"
+    if last_name is None or len(last_name) == 0:
         return "Поле не должно быть пустым"
     return None
 
