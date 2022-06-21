@@ -3,8 +3,9 @@
 
 {% block content %}
 
-<h1>Добавление книги</h1>
-
+<div class="container text-center">
+    <h1>Добавление книги</h1>
+</div>
 {{ render_book_form(url_for('library.create'), genres) }}
 
 {% endblock %}

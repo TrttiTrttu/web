@@ -26,7 +26,9 @@ class ImageSaver:
                                     self.img.storage_filename))
         db.session.add(self.img)
         db.session.commit()
+      
         return self.img
+
 
     def __find_by_md5_hash(self):
         self.md5_hash = hashlib.md5(self.file.read()).hexdigest()

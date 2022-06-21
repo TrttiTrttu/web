@@ -3,8 +3,10 @@
 
 {% block content %}
 
-<h1>Редактирование книги</h1>
+<div class="container text-center">
+    <h1>Редактирование книги</h1>
+</div>    
 
-{{ render_book_form(url_for('library.update'), book) }}
+{{ render_book_form(url_for('library.edit', book_id=book.id), genres, book) }}
 
 {% endblock %}

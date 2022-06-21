@@ -3,7 +3,6 @@ from sqlalchemy import MetaData
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import current_user
-
 import os
 
 app = Flask(__name__)
@@ -29,12 +28,14 @@ app.register_blueprint(auth_bp)
 app.register_blueprint(library_bp)
 init_login_manager(app)
 
-from models import User
+from models import User, Books
 # from models import Category, User, Image
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    books = Books.query.all()
+
+    return render_template('index.html', books=books)
 
 @app.route('/media/images/<image_id>')
 def image(image_id):

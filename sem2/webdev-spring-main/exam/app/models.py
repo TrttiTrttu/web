@@ -73,7 +73,6 @@ class Books(db.Model):
     author = db.Column(db.String(100), nullable=False)
     volume = db.Column(db.Integer, nullable=False)
 
-    cover_img = db.relationship('Covers')
     genre = db.relationship('Genre', secondary=book_genre_like, lazy='subquery')
 
     def __repr__(self):

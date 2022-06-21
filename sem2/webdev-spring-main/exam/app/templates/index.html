@@ -1,14 +1,85 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form action="{{ url_for('library.new') }}" class="row align-items-center">
-    <div class="col-sm-12 col-md-2 align-self-end">
-        <button type="submit" class="btn btn-outline-dark w-100 mt-auto">Добавить книгу</button>
+
+<div class="container text-center">
+    <h1 class="my-5">Список книг</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Название</th>
+                <th>Жанр</th>
+                <th>Год</th>
+                <th>Ср. оценка</th>
+                <th>Отзывов</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td class="book-name">{{ book.name }}</td>
+                    <td>{% for genre in book.genre %}
+                            {% if not loop.last %}
+                                {{ genre.name + ', '}}
+                            {% else %}
+                                {{ genre.name }}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ book.year }}</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-primary" href="{{ url_for('library.show') }}">Просмотр</a>
+                            {% if current_user.is_authenticated %}
+                                {% if current_user.can('update', record=user) %}
+                                <a class="btn btn-secondary" href="{{ url_for('library.update',  book_id = book.id) }}">Редактирование книги</a>
+                                {% endif %}
+                                {% if current_user.can('delete', record=user) %}
+                                <button type="button" class="btn btn-danger" data-url="{{ url_for('library.delete', book_id = book.id) }}" data-bs-toggle="modal" data-bs-target="#delete-user-modal">Удалить</button>
+                                {% endif %}
+                            {% endif %}
+                            
+                        </div>
+                        
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if current_user.is_admin %}
+    <form action="{{ url_for('library.new') }}" class="row   align-items-center">
+        <div class="col-sm-12 col-md-2 align-self-end mx-auto">
+            <button type="submit" class="btn btn-outline-dark w-100 mt-auto">Добавить книгу</button>
+        </div>
+    </form>
+    {% endif %}
+</div>
+
+
+<div class="modal fade" id="delete-user-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-center">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Удаление книги</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Вы точно хотите удалить книгу <span id="modal-book-name"></span>?
+            <form action="" method="POST">
+                <!-- <input type="hidden" name="user_id" value=""> в данном случае не нужно так писать -->
+                <input id="delete-btn" type="submit" class="d-none">
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+          <label for="delete-btn" class="btn btn-danger">Да</label>
+        </div>
+      </div>
     </div>
-</form>
-<form action="{{ url_for('library.update') }}" class="row align-items-center">
-    <div class="col-sm-12 col-md-2 align-self-end">
-        <button type="submit" class="btn btn-outline-dark w-100 mt-auto">Редактирование книги</button>
-    </div>
-</form>
+  </div>
 {% endblock %}

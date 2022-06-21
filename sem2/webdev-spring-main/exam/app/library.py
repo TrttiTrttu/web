@@ -1,11 +1,12 @@
-import io
 import datetime
 from flask import Blueprint, render_template, request, redirect, url_for, flash, send_file
 from flask_login import login_required, current_user
-from models import User, Books, Reviews, Genre, book_genre_like
+from models import User, Books, Reviews, Genre, book_genre_like, Covers
 from auth import check_rights
 from tools import ImageSaver
-from app import db
+from app import db, app
+import os
+import bleach
 
 bp = Blueprint('library', __name__, url_prefix='/library')
 
@@ -14,7 +15,7 @@ PER_PAGE = 5
 BOOK_PARAMS = ['name', 'short_desc', 'year', 'author', 'publisher', 'volume']
 
 def params():
-    return {p: request.form.get(p) for p in BOOK_PARAMS }
+    return {p: bleach.clean(request.form.get(p)) for p in BOOK_PARAMS }
 
 @bp.route('/new')
 @check_rights('create')
@@ -39,15 +40,77 @@ def create():
     f = request.files.get('cover_img')
     if f and f.filename:
         img = ImageSaver(f, book).save()
-
-    db.session.commit()
+    
+    try:
+        db.session.commit()
+    except:
+        flash("Произошла ошибка, книга не была добавлена", 'danger')
+        return redirect(url_for('index'))
 
     flash(f'Книга {book.name} была успешна добавлена.', 'success')
     return redirect(url_for('index'))
 
-@bp.route('/update')
+@bp.route('/<int:book_id>/update')
 @check_rights('update')
 @login_required
-def update():
+def update(book_id):
+    book= Books.query.get(book_id)
+    genres = Genre.query.all()
+    return render_template('library/update.html', genres=genres, book=book)
+
+@bp.route('/<int:book_id>/edit', methods=['POST'])
+@check_rights('update')
+@login_required
+def edit(book_id):
+    book = Books.query.get(book_id)
+    genres = request.form.getlist('genres')
+    try:
+        book.name = bleach.clean(request.form.get('name')) 
+        book.short_desc = bleach.clean(request.form.get('short_desc')) 
+        book.year = bleach.clean(request.form.get('year')) 
+        book.author = bleach.clean(request.form.get('author')) 
+        book.publisher = bleach.clean(request.form.get('publisher')) 
+        book.volume = bleach.clean(request.form.get('volume')) 
+        book.genre.clear()
+        for genre_ in genres:
+            genre = Genre.query.get(genre_)
+            book.genre.append(genre, book.id)
+
+        db.session.add(book)
+        db.session.commit()
+    except:
+        db.session.rollback()
+        flash("Произошла ошибка, книга не была обновлена", 'danger')
+        return redirect(url_for('index'))
+
+    flash(f'Книга {book.name} была успешна обновлена.', 'success')
+    return redirect(url_for('index'))
+
+@bp.route('/<int:book_id>/delete', methods=['POST'])
+@check_rights('delete')
+@login_required
+def delete(book_id):
+    book = Books.query.get(book_id)
+    cover = Covers.query.filter(Covers.book_id==book_id).first()
+    db.session.delete(book)
+
+    if cover is not None:
+        cover_img = cover.get(storage_filename, None)
+        os.remove(os.path.join(app.config['UPLOAD_FOLDER'], cover_img))
+        db.session.delete(cover)
+
+    try:
+        db.session.commit()
+    except:
+        flash("Произошла ошибка, книга не удалена", 'danger')
+        return redirect(url_for('index'))
+
+    flash("Книга была успешно удалена!", 'success')
+    return redirect(url_for('index'))
+
+
+
+@bp.route('/show')
+def show():
     book= {}
-    return render_template('library/update .html', book=book)
+    return render_template('library/show.html', book=book)
