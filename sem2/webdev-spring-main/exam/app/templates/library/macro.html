@@ -1,0 +1,11 @@
+{% macro render_book_form(url, book={}) %}
+<form action="{{ url }}" method="POST" style="max-width: 40rem;">
+    {% if request.endpoint in ['new']  %}
+    
+    {% endif %}
+    <p>{{ url }}</p>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </div>
+</form>
+{% endmacro %}
