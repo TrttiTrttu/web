@@ -55,6 +55,13 @@ class Roles(db.Model):
     def __repr__(self):
         return '<Role %r>' % self.role
 
+book_genre_like = db.Table('book_genre_like',
+    db.Column('genre_id', db.Integer, db.ForeignKey('genre.id'), primary_key=True),
+    db.Column('book_id', db.Integer, db.ForeignKey('books.id'), primary_key=True)
+
+
+)
+
 class Books(db.Model):
     __tablename__ = 'books'
 
@@ -66,22 +73,19 @@ class Books(db.Model):
     author = db.Column(db.String(100), nullable=False)
     volume = db.Column(db.Integer, nullable=False)
 
+    cover_img = db.relationship('Covers')
+    genre = db.relationship('Genre', secondary=book_genre_like, lazy='subquery')
+
     def __repr__(self):
         return '<Role %r>' % self.name
 
-class Сover(db.Model):
-    __tablename__ = 'cover'
+class Genre(db.Model):
+    __tablename__ = 'genre'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    mime_type = db.Column(db.String(100), nullable=False)
-    md5_hash = db.Column(db.String(100), nullable=False)
-    book_id = db.Column(db.Integer, db.ForeignKey('books.id'))
 
-    book = db.relationship('Books')
 
-    def __repr__(self):
-        return '<Cover %r>' % self.name
 
 class Reviews(db.Model):
     __tablename__ = 'reviews'
@@ -104,3 +108,25 @@ class Reviews(db.Model):
         if self.rating_num > 0:
             return self.rating_sum / self.rating_num
         return 0
+
+class Covers(db.Model):
+    __tablename__='covers'
+
+    id = db.Column(db.String(100), primary_key=True)
+    file_name = db.Column(db.String(100), nullable=False)
+    mime_type = db.Column(db.String(100), nullable=False)
+    md5_hash = db.Column(db.String(100), nullable=False, unique=True)
+    book_id = db.Column(db.Integer, db.ForeignKey('books.id'))
+    book = db.relationship('Books')
+
+    @property
+    def storage_filename(self):
+        _, ext = os.path.splitext(self.file_name)
+        return self.id + ext
+
+    @property
+    def url(self):
+        return url_for('image', image_id=self.id)
+
+    def __repr__(self):
+        return 'Image %r' % self.file_name

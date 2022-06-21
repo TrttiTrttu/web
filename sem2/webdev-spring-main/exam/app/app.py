@@ -35,3 +35,11 @@ from models import User
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/media/images/<image_id>')
+def image(image_id):
+    image = Image.query.get(image_id)
+    if image is None:
+        abort(404)
+    # return send_file(os.path.join(app.config['UPLOAD_FOLDER'], image.storage_filename))
+    return send_from_directory(app.config['UPLOAD_FOLDER'], image.storage_filename)

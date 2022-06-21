@@ -1,11 +1,61 @@
-{% macro render_book_form(url, book={}) %}
-<form action="{{ url }}" method="POST" style="max-width: 40rem;">
-    {% if request.endpoint in ['new']  %}
+{% macro render_book_form(url, genres, book={} ) %}
+
+<div class="container">
+
+    <form action="{{ url }}" method="POST" style="max-width: 40rem;" enctype="multipart/form-data">
+        <div class="mb-3 row">
+            <div class="col-md-6 d-flex flex-column">
+                <div class="mb-3">
+                    <label for="name">Название</label>
+                    <input required class="form-control" type="text" name="name" id="name">
+                </div>
+                <div class="mb-3 d-flex flex-column flex-grow-1">
+                    <label for="short_description">Краткое описание</label>
+                    <textarea required class="form-control flex-grow-1" name="short_desc" id="short_description" cols="30" rows="5"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="genres">Жанр</label>
+                    <select multiple class="form-select" name="genres" id="genres">
+                        {% for genre in genres %}
+                            <option value="{{ genre.id }}">{{ genre.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="name">Год написания</label>
+                    <input required class="form-control" type="text" name="year" id="year">
+                </div>
+                <div class="mb-3">
+                    <label for="name">Издательство</label>
+                    <input required class="form-control" type="text" name="publisher" id="publisher">
+                </div>
+                <div class="mb-3">
+                    <label for="name">Автор</label>
+                    <input required class="form-control" type="text" name="author" id="author">
+                </div>
+                <div class="mb-3">
+                    <label for="name">Объем</label>
+                    <input required class="form-control" type="text" name="volume" id="volume">
+                </div>
+            </div>
+            {% if request.endpoint in ['library.new', 'library.create']  %}
+            <div class="col-md-6 d-flex flex-column">
+                <div class="mb-3">
+                    <label for="cover_img">Обложка</label>
+                    <input class="form-control" type="file" name="cover_img" id="cover_img">
+                </div>
+                <div class="mb-3 background-preview p-3 rounded d-flex align-items-center justify-content-center">
+                    <img src="#" class="img-fluid d-none" alt="">
+                    <label for="cover_img" class="btn btn-dark">Выбрать изображение</label>
+                </div>
+            </div>
+            {% endif %}
+        </div>
     
-    {% endif %}
-    <p>{{ url }}</p>
-    <div class="mb-3">
-        <button type="submit" class="btn btn-primary">Сохранить</button>
-    </div>
-</form>
+        <div class="mb-3 text-center">
+            <input type="submit" class="btn btn-dark" value="Сохранить">
+        </div>
+    </form>
+</div>
+
 {% endmacro %}

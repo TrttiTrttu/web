@@ -48,12 +48,12 @@ def new():
 @bp.route('/create', methods=["POST"])
 def create():
 
-    f = request.files.get('background_img')
+    f = request.files.get('cover_img')
     if f and f.filename:
         img = ImageSaver(f).save()
 
-    course = Course(**params(), background_image_id = img.id)
-    db.session.add(course)
+    book = Course(**params(), background_image_id = img.id)
+    db.session.add(book)
     db.session.commit()
 
     flash(f'Курс {course.name} был успешно создан.')
