@@ -1,8 +1,22 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
-from flask_login import LoginManager, login_user, logout_user, login_required
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user, UserMixin
 from models import User
+from users_policy import UsersPolicy
+import functools
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
+
+def check_rights(action):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args,**kwargs):
+            user = load_user(kwargs.get('user_id'))  
+            if not current_user.can(action, record=user):
+                flash('У вас недостаточно прав для доступа к данной странице', 'danger')
+                return redirect(url_for('index'))
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
 
 
 def init_login_manager(app):
@@ -16,6 +30,8 @@ def init_login_manager(app):
 def load_user(user_id):
     user = User.query.get(user_id)
     return user
+
+
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():

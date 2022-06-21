@@ -1,1 +1,9 @@
 {% extends 'base.html' %}
+
+{% block content %}
+<form action="{{ url_for('library.new') }}" class="row align-items-center">
+    <div class="col-sm-12 col-md-2 align-self-end">
+        <button type="submit" class="btn btn-outline-dark w-100 mt-auto">Добавить книгу</button>
+    </div>
+</form>
+{% endblock %}
