@@ -30,8 +30,8 @@ app.register_blueprint(auth_bp)
 app.register_blueprint(library_bp)
 init_login_manager(app)
 
-from models import User, Books, Covers
-# from models import Category, User, Image
+from models import User, Books, Covers, Reviews
+
 
 @app.route('/')
 def index():
@@ -39,8 +39,11 @@ def index():
     books = Books.query.order_by(Books.year.desc())
     pagination = books.paginate(page, PER_PAGE)
     books = pagination.items
-
-    return render_template('index.html', pagination=pagination, books=books)
+    reviews = []
+    for book in books:
+        reviews.append(Reviews.query.filter(Reviews.book_id == book.id).order_by(Reviews.created_at.desc()).all())
+    
+    return render_template('index.html', pagination=pagination, books=books, reviews=reviews)
 
 @app.route('/media/images/<cover_id>')
 def image(cover_id):

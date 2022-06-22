@@ -67,9 +67,6 @@ window.onload = function() {
         let easyMDE = new EasyMDE({
             element: document.getElementById('text-content'),
             toolbar: TOOLBAR_ITEMS,
-            uploadImage: true,
-            imageUploadEndpoint: '/api/images/upload',
-            imageUploadFunction: imageUploadFunction
         });
     }
 }

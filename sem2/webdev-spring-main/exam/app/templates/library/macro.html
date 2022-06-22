@@ -7,11 +7,19 @@
             <div class="{% if request.endpoint == 'library.update' %} col-12 {% else %} col-md-6 {% endif %} d-flex flex-column">
                 <div class="mb-3">
                     <label for="name">Название</label>
-                    <input required class="form-control" type="text" name="name" id="name" {% if request.endpoint == 'library.show' %}readonly{% endif %} value="{{ book.name or '' }}">
+                    {% if request.endpoint == 'library.show' %}
+                        <p>{{ '"' + book.name + '"'}}</p>
+                    {% else %}
+                    <input required class="form-control" type="text" name="name" id="name" value="{{ book.name or '' }}">
+                    {% endif %}
                 </div>
                 <div class="mb-3 d-flex flex-column flex-grow-1">
                     <label for="short_description">Краткое описание</label>
-                    <textarea required class="form-control flex-grow-1" name="short_desc" id="short_description" cols="30" rows="5" {% if request.endpoint == 'library.show' %}readonly{% endif %}>{{ book.short_desc or '' }}</textarea>
+                    {% if request.endpoint == 'library.show' %}
+                        <p>{{ book.markdown|safe }}</p>
+                    {% else %}
+                        <textarea required class="form-control flex-grow-1" name="short_desc" id="text-content" cols="30" rows="5">{{ book.short_desc or '' }}</textarea>
+                    {% endif %}
                 </div>
                 <div class="mb-3">
                     <label for="genres">Жанр</label>
@@ -35,19 +43,35 @@
                 </div>
                 <div class="mb-3">
                     <label for="name">Год написания</label>
-                    <input required class="form-control" type="text" name="year" id="year" {% if request.endpoint == 'library.show' %}readonly{% endif %} value="{{ book.year or '' }}">
+                    {% if request.endpoint == 'library.show' %}
+                        <p>{{ book.year }}</p>
+                    {% else %}  
+                        <input required class="form-control" type="text" name="year" id="year" value="{{ book.year or '' }}">
+                    {% endif %}
                 </div>
                 <div class="mb-3">
                     <label for="name">Издательство</label>
-                    <input required class="form-control" type="text" name="publisher" id="publisher" {% if request.endpoint == 'library.show' %}readonly{% endif %} value="{{ book.publisher or '' }}">
+                    {% if request.endpoint == 'library.show' %}
+                        <p>{{ book.publisher }}</p>
+                    {% else %}  
+                        <input required class="form-control" type="text" name="publisher" id="publisher" value="{{ book.publisher or '' }}">
+                    {% endif %}
                 </div>
                 <div class="mb-3">
                     <label for="name">Автор</label>
-                    <input required class="form-control" type="text" name="author" id="author" {% if request.endpoint == 'library.show' %}readonly{% endif %} value="{{ book.author or '' }}">
+                    {% if request.endpoint == 'library.show' %}
+                        <p>{{ book.author }}</p>
+                    {% else %}  
+                        <input required class="form-control" type="text" name="author" id="author" value="{{ book.author or '' }}">
+                    {% endif %}
                 </div>
                 <div class="mb-3">
                     <label for="name">Объем</label>
-                    <input required class="form-control" type="text" name="volume" id="volume" {% if request.endpoint == 'library.show' %}readonly{% endif %} value="{{ book.volume or '' }}">
+                    {% if request.endpoint == 'library.show' %}
+                        <p>{{ book.volume | string + ' стр.' }}</p>
+                    {% else %}  
+                        <input required class="form-control" type="text" name="volume" id="volume" value="{{ book.volume or '' }}">
+                    {% endif %}
                 </div>
             </div>
             {% if request.endpoint in ['library.new', 'library.create']  %}

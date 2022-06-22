@@ -5,6 +5,7 @@ from flask_login import UserMixin
 import os
 from flask import url_for
 from users_policy import UsersPolicy
+from markdown import markdown
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -58,8 +59,6 @@ class Roles(db.Model):
 book_genre_like = db.Table('book_genre_like',
     db.Column('genre_id', db.Integer, db.ForeignKey('genre.id'), primary_key=True),
     db.Column('book_id', db.Integer, db.ForeignKey('books.id'), primary_key=True)
-
-
 )
 
 class Books(db.Model):
@@ -74,6 +73,19 @@ class Books(db.Model):
     volume = db.Column(db.Integer, nullable=False)
 
     genre = db.relationship('Genre', secondary=book_genre_like, lazy='subquery')
+
+    rating_sum = db.Column(db.Integer, nullable=False, default=0)
+    rating_num = db.Column(db.Integer, nullable=False, default=0)
+
+    @property
+    def markdown(self):
+        return markdown(self.short_desc)
+
+    @property
+    def rating(self):
+        if self.rating_num > 0:
+            return self.rating_sum / self.rating_num
+        return 0
 
     def __repr__(self):
         return '<Role %r>' % self.name
@@ -99,14 +111,12 @@ class Reviews(db.Model):
     book = db.relationship('Books')
     user = db.relationship('User')
 
-    def __repr__(self):
-        return '<Cover %r>' % self.name
-
     @property
-    def rating(self):
-        if self.rating_num > 0:
-            return self.rating_sum / self.rating_num
-        return 0
+    def markdown(self):
+        return markdown(self.text)
+
+    def __repr__(self):
+        return '<Reviews %r>' % self.id
 
 class Covers(db.Model):
     __tablename__='covers'

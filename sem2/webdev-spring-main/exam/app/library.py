@@ -8,6 +8,7 @@ from app import db, app
 import os
 import bleach
 
+
 bp = Blueprint('library', __name__, url_prefix='/library')
 
 PER_PAGE = 5
@@ -44,6 +45,7 @@ def create():
     try:
         db.session.commit()
     except:
+        db.session.rollback()
         flash("Произошла ошибка, книга не была добавлена", 'danger')
         return redirect(url_for('index'))
 
@@ -66,7 +68,7 @@ def edit(book_id):
     genres = request.form.getlist('genres')
     try:
         book.name = bleach.clean(request.form.get('name')) 
-        book.short_desc = bleach.clean(request.form.get('short_desc')) 
+        book.short_desc = bleach.clean(request.form.get('short_desc'))
         book.year = bleach.clean(request.form.get('year')) 
         book.author = bleach.clean(request.form.get('author')) 
         book.publisher = bleach.clean(request.form.get('publisher')) 
@@ -102,6 +104,7 @@ def delete(book_id):
     try:
         db.session.commit()
     except:
+        db.session.rollback()
         flash("Произошла ошибка, книга не удалена", 'danger')
         return redirect(url_for('index'))
 
@@ -115,4 +118,33 @@ def show(book_id):
     book = Books.query.get(book_id)
     genres = Genre.query.all()
     cover = Covers.query.filter(Covers.book_id==book_id).first()
-    return render_template('library/show.html', genres=genres, book=book, cover=cover)
+    print(book.markdown)
+    reviews = Reviews.query.filter(Reviews.book_id == book.id).order_by(Reviews.created_at.desc()).all()
+        
+    user_review = None
+    if current_user.is_authenticated:
+        user_review = Reviews.query.filter(Reviews.book_id == book.id).filter(Reviews.user_id == current_user.id).first()
+    return render_template('library/show.html', genres=genres, book=book, cover=cover, reviews=reviews, user_review=user_review)
+
+
+@bp.route('/<int:book_id>/reviews/create', methods=["POST"])
+@login_required
+def create_review(book_id):
+    user_id = current_user.id
+    review_rating = bleach.clean(request.form.get('review-rating'))
+    review_text = bleach.clean(request.form.get('review-text'))
+
+    user_review = Reviews(user_id=user_id, rating=review_rating, text=review_text, book_id=book_id)
+    db.session.add(user_review)
+
+    book = Books.query.get(book_id)
+    book.rating_num += 1
+    book.rating_sum += int(review_rating)
+    try:
+        db.session.commit()
+    except:
+        db.session.rollback()
+        flash("Произошла ошибка, отзыв не был добавлен", 'danger')
+        return redirect(url_for('index'))
+    flash("Отзыв был успешно добавлен!", 'success')
+    return redirect(url_for('index'))

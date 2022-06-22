@@ -20,7 +20,7 @@
         <tbody>
             {% for book in books %}
                 <tr>
-                    <td>{{ loop.index }}</td>
+                    <td>{{ (pagination.page | int - 1)*5 + loop.index }}</td>
                     <td class="book-name">{{ book.name }}</td>
                     <td>{% for genre in book.genre %}
                             {% if not loop.last %}
@@ -31,8 +31,8 @@
                         {% endfor %}
                     </td>
                     <td>{{ book.year }}</td>
-                    <td>0</td>
-                    <td>0</td>
+                    <td>{{ "{:,.2f}".format(book.rating) }}</td>
+                    <td>{{ book.rating_num }}</td>
                     <td>
                         <div class="btn-group">
                             <a class="btn btn-primary" href="{{ url_for('library.show', book_id = book.id) }}">Просмотр</a>
