@@ -18,15 +18,15 @@ def params():
     return {p: bleach.clean(request.form.get(p)) for p in BOOK_PARAMS }
 
 @bp.route('/new')
-@check_rights('create')
 @login_required
+@check_rights('create')
 def new():
     genres = Genre.query.all()
     return render_template('library/new.html', genres=genres)
 
-@bp.route('/create', methods=['POST'])
-@check_rights('create')
+@bp.route('/create', methods=['GET', 'POST'])
 @login_required
+@check_rights('create')
 def create():
     book = Books(**params())
     genres = request.form.getlist('genres')
@@ -51,16 +51,16 @@ def create():
     return redirect(url_for('index'))
 
 @bp.route('/<int:book_id>/update')
-@check_rights('update')
 @login_required
+@check_rights('update')
 def update(book_id):
     book= Books.query.get(book_id)
     genres = Genre.query.all()
     return render_template('library/update.html', genres=genres, book=book)
 
-@bp.route('/<int:book_id>/edit', methods=['POST'])
-@check_rights('update')
+@bp.route('/<int:book_id>/edit', methods=['GET','POST'])
 @login_required
+@check_rights('update')
 def edit(book_id):
     book = Books.query.get(book_id)
     genres = request.form.getlist('genres')
@@ -86,9 +86,9 @@ def edit(book_id):
     flash(f'Книга {book.name} была успешна обновлена.', 'success')
     return redirect(url_for('index'))
 
-@bp.route('/<int:book_id>/delete', methods=['POST'])
-@check_rights('delete')
+@bp.route('/<int:book_id>/delete', methods=['GET','POST'])
 @login_required
+@check_rights('delete')
 def delete(book_id):
     book = Books.query.get(book_id)
     cover = Covers.query.filter(Covers.book_id==book_id).first()
@@ -110,7 +110,9 @@ def delete(book_id):
 
 
 
-@bp.route('/show')
-def show():
-    book= {}
-    return render_template('library/show.html', book=book)
+@bp.route('/<int:book_id>/show')
+def show(book_id):
+    book = Books.query.get(book_id)
+    genres = Genre.query.all()
+    cover = Covers.query.filter(Covers.book_id==book_id).first()
+    return render_template('library/show.html', genres=genres, book=book, cover=cover)

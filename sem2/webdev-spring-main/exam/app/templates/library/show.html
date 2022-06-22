@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
+{% from 'library/macro.html' import render_book_form %}
 
 {% block content %}
 
-<div class="container text-center">
+<div class="mt-3 container text-center">
     <h1>Просмотр книги</h1>
 </div>    
+
+{{ render_book_form(url_for('library.show', book_id=book.id), genres, book, cover) }}
 
 {% endblock %}
