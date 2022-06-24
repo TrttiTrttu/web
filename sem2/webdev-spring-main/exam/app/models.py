@@ -104,7 +104,6 @@ class Visits(db.Model):
     path = db.Column(db.String(100), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, server_default=sa.sql.func.now())
 
-
     user = db.relationship('User')
 
 class Reviews(db.Model):
