@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h1 class="text-center">Статистика</h1>
+
+<ul class="nav nav-tabs container">
+    <li class="nav-item">
+      <a class="nav-link {% if request.endpoint == 'visits.users_stat' %}active{% endif %}" href="{{ url_for('visits.users_stat') }}">Журнал действий пользователей</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if request.endpoint == 'visits.books_stat' %}active{% endif %}" href="{{ url_for('visits.books_stat') }}">Статистика просмотра книг</a>
+    </li>
+</ul>
+
+<div class="mt-5 container">
+    {% block tab_content %}
+    {% endblock %}
+</div>
+
+
+{% endblock %} 

@@ -22,6 +22,13 @@
                         <img class="img-fluid" src="{{ url_for('static', filename='images/book_logo.png') }}" alt="book-logo">
                     </a>
                 </div>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    {% if current_user.is_admin %}
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.endpoint == 'visits.logs' %}active{% endif %}" aria-current="page" href="{{ url_for('visits.logs') }}">Статистика</a>
+                    </li>
+                    {% endif %}
+                  </ul>
                 {% if current_user.is_authenticated %}
                 <div class="dropdown d-flex" style="width: 200px;">
                     <div class="profile ms-auto" title="{{ current_user.full_name }}" id="dropdownMenuButton" data-bs-toggle="dropdown"
@@ -53,8 +60,11 @@
     </div>
 
     <main class="main flex-grow-1">
-       {% block content %}
-       {% endblock %}
+        
+
+            {% block content %}
+            {% endblock %}
+        
     </main>
 
     <footer class="bg-dark text-white d-flex align-items-center justify-content-center py-3">

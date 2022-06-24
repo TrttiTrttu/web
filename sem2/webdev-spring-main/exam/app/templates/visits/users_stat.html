@@ -1,0 +1,55 @@
+{% extends 'visits/base.html' %}
+{% from 'pagination.html' import render_pagination %}
+
+{% block tab_content %}
+
+<h2>Статистика по пользователям</h2>
+
+<div class="container my-3">
+    <form action="{{ users_stat }}" method="POST" style="max-width: 40rem;">
+        <div class="mb-3 row">
+            <label for="start">От:</label>
+            <input class="col-md-3" type="date" id="start" name="trip-start" value="{{ fromdate }}">
+           
+            <label for="end">До:</label>
+            <input class="col-md-3" type="date" id="end" name="trip-end" value="{{ todate }}">
+        </div>
+        <div class="mb-3 ">
+            <input type="submit" class="btn btn-dark" value="Применить">
+        </div>
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>Пользоваталь</th>
+            <th>Количество посещений</th>
+            <th>Время посещения</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in records %}
+            <tr>
+                <td>{{ (pagination.page | int - 1)*10 + loop.index }}</td>
+                <td>
+                    {% if record.user.last_name %}
+                        {{ record.user.last_name }} {{ record.user.first_name }} {{ record.user.middle_name or '' }}
+                    {% else %}
+                        Неатутентифицированный пользователь 
+                    {% endif%}
+                </td>
+                <td>{{ record.path }}</td>
+                <td>{{ record.created_at.strftime('%d-%m-%Y %H:%M:%S') }}</td>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{{ render_pagination(pagination, request.endpoint, {'fromdate':fromdate, 'todate': todate}) }}
+
+<a class="btn btn-primary mb-5" href="{{ url_for('visits.users_stat', download_csv='True') }}">Экcпорт в CSV</a>
+
+{% endblock %}

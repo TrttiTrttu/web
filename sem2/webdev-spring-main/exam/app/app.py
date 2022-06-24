@@ -100,6 +100,7 @@ def index():
         cookies = cookies[cookies.find('>') + 1:]
         if Books.query.get(id) is not None:
             last_books.append(Books.query.get(id))
+
     return render_template('index.html', pagination=pagination, books=books, reviews=reviews, top_books=top_books, visit_num=visit_num, last_books=last_books)
 
 @app.route('/media/images/<cover_id>')
@@ -108,4 +109,3 @@ def image(cover_id):
     if cover_img is None:
         abort(404)
     return send_file(os.path.join(app.config['UPLOAD_FOLDER'], cover_img.storage_filename))
-    # return send_from_directory(app.config['UPLOAD_FOLDER'], cover_img.storage_filename)

@@ -93,7 +93,7 @@
                     </td>
                     <td>{{ book.year }}</td>
                     <td>{{ "{:,.2f}".format(book.rating) }}</td>
-                    <td>{{ visit_num[loop.index] }}</td>
+                    <td>{{ visit_num[loop.index - 1] }}</td>
                     <td>
                         <div class="btn-group">
                             <a class="btn btn-primary" href="{{ url_for('library.show', book_id = book.id) }}">Просмотр</a>
