@@ -12,7 +12,8 @@
 <div class="mt-3 container text-center">
 
     <section class="reviews mb-5">
-        <h2 class="mb-3 text-center text-uppercase font-weight-bold">Отзывы о курсе</h2>
+        {% if reviews %}
+        <h2 class="mb-3 text-center text-uppercase font-weight-bold">Отзывы о книге</h2>
         <table class="table">
             <thead>
                 <tr>
@@ -35,6 +36,7 @@
                 {% endfor %}
             </tbody>
         </table>
+        {%  endif %}
         {% if not user_review and current_user.is_authenticated %}
         <h2 class="text-center mt-5">Оставить отзыв</h2>
     

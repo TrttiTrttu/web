@@ -74,12 +74,62 @@
                 <th>Жанр</th>
                 <th>Год</th>
                 <th>Ср. оценка</th>
-                <th>Отзывов</th>
+                <th>Посещений</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             {% for book in top_books %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td class="book-name">{{ book.name }}</td>
+                    <td>{% for genre in book.genre %}
+                            {% if not loop.last %}
+                                {{ genre.name + ', '}}
+                            {% else %}
+                                {{ genre.name }}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ book.year }}</td>
+                    <td>{{ "{:,.2f}".format(book.rating) }}</td>
+                    <td>{{ visit_num[loop.index] }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-primary" href="{{ url_for('library.show', book_id = book.id) }}">Просмотр</a>
+                            {% if current_user.is_authenticated %}
+                                {% if current_user.can('update', record=user) %}
+                                <a class="btn btn-secondary" href="{{ url_for('library.update',  book_id = book.id) }}">Редактирование книги</a>
+                                {% endif %}
+                                {% if current_user.can('delete', record=user) %}
+                                <button type="button" class="btn btn-danger" data-url="{{ url_for('library.delete', book_id = book.id) }}" data-bs-toggle="modal" data-bs-target="#delete-user-modal">Удалить</button>
+                                {% endif %}
+                            {% endif %}
+                            
+                        </div>
+                        
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if last_books|length != 0 %}
+    <h1 class="my-5">Последние просмотренные</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Название</th>
+                <th>Жанр</th>
+                <th>Год</th>
+                <th>Ср. оценка</th>
+                <th>Отзывов</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in last_books %}
                 <tr>
                     <td>{{ loop.index }}</td>
                     <td class="book-name">{{ book.name }}</td>
@@ -113,6 +163,7 @@
             {% endfor %}
         </tbody>
     </table>
+    {% endif %}
 </div>
 
 

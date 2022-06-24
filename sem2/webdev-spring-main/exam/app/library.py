@@ -1,5 +1,5 @@
 import datetime
-from flask import Blueprint, render_template, request, redirect, url_for, flash, send_file
+from flask import Blueprint, render_template, request, redirect, url_for, flash, send_file, make_response
 from flask_login import login_required, current_user
 from models import User, Books, Reviews, Genre, book_genre_like, Covers
 from auth import check_rights
@@ -128,7 +128,20 @@ def show(book_id):
     user_review = None
     if current_user.is_authenticated:
         user_review = Reviews.query.filter(Reviews.book_id == book.id).filter(Reviews.user_id == current_user.id).first()
-    return render_template('library/show.html', genres=genres, book=book, cover=cover, reviews=reviews, user_review=user_review)
+    rsp =  make_response(render_template('library/show.html', genres=genres, book=book, cover=cover, reviews=reviews, user_review=user_review))
+    new_cookies = ''
+    old_cookies = request.cookies.get('5last') or ''
+    
+    if old_cookies.count('>') > 5:
+        old_cookies = old_cookies[:old_cookies.rfind('<')]
+
+    if f'<{book.id}>' in old_cookies:
+        old_cookies = old_cookies.replace(f'<{book.id}>', '')
+
+    new_cookies += f'<{book.id}>' + old_cookies
+    rsp.set_cookie('5last', new_cookies)
+    
+    return rsp
 
 
 @bp.route('/<int:book_id>/reviews/create', methods=["POST"])

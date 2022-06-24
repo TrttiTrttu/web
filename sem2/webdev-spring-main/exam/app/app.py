@@ -79,18 +79,28 @@ def index():
         if book_id in dict_top_books:
             dict_top_books[book_id] += 1
         else:
-            dict_top_books[book_id] = 1   
+            dict_top_books[book_id] = 1  
+
     top_books_ids = sorted(dict_top_books, key=dict_top_books.get)
     top_books_ids = top_books_ids[::-1]
     top_books = []
-    
+    visit_num = []
+
     for i in top_books_ids:
         if Books.query.get(i) is not None:
+            visit_num.append(dict_top_books.get(i))
             top_books.append(Books.query.get(i))
-    if len(top_books) > 5:
         top_books = top_books[0:5]
 
-    return render_template('index.html', pagination=pagination, books=books, reviews=reviews, top_books=top_books)
+    last_books = []
+    cookies = request.cookies.get('5last') or ''
+    
+    for i in range(cookies.count('>')):
+        id = cookies[cookies.find('<') + 1:cookies.find('>')]
+        cookies = cookies[cookies.find('>') + 1:]
+        if Books.query.get(id) is not None:
+            last_books.append(Books.query.get(id))
+    return render_template('index.html', pagination=pagination, books=books, reviews=reviews, top_books=top_books, visit_num=visit_num, last_books=last_books)
 
 @app.route('/media/images/<cover_id>')
 def image(cover_id):
