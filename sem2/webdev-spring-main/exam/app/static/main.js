@@ -56,16 +56,17 @@ const TOOLBAR_ITEMS = [
 ]
 
 window.onload = function() {
-    let background_img_field = document.getElementById('background_img');
-    if (background_img_field) {
-        background_img_field.onchange = imagePreviewHandler;
-    }
-    for (let course_elm of document.querySelectorAll('.courses-list .row')) {
-        course_elm.onclick = openLink;
-    }
+
     if (document.getElementById('text-content')) {
         let easyMDE = new EasyMDE({
             element: document.getElementById('text-content'),
+            toolbar: TOOLBAR_ITEMS,
+        });
+    }
+
+    if (document.getElementById('short_desc')) {
+        let easyMDE = new EasyMDE({
+            element: document.getElementById('short_desc'),
             toolbar: TOOLBAR_ITEMS,
         });
     }
@@ -79,3 +80,5 @@ myModalEl.addEventListener('show.bs.modal', function (event) {
     let userNameElement = document.getElementById('modal-book-name');
     userNameElement.innerHTML = event.relatedTarget.closest('tr').querySelector('.book-name').textContent;
 })
+
+

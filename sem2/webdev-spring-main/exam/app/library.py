@@ -31,7 +31,6 @@ def new():
 def create():
     book = Books(**params())
     genres = request.form.getlist('genres')
-
     for genre_ in genres:
         genre = Genre.query.get(genre_)
         book.genre.append(genre, book.id)
@@ -94,13 +93,19 @@ def edit(book_id):
 def delete(book_id):
     book = Books.query.get(book_id)
     cover = Covers.query.filter(Covers.book_id==book_id).first()
+    reviews = Reviews.query.filter(Reviews.book_id==book_id).all()
+
+    for review in reviews:
+        db.session.delete(review)
     db.session.delete(book)
 
     if cover is not None:
-        cover_img = cover.get(storage_filename, None)
-        os.remove(os.path.join(app.config['UPLOAD_FOLDER'], cover_img))
+        cover_img = cover.storage_filename
+        if os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], cover_img)):
+            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], cover_img))
         db.session.delete(cover)
 
+   
     try:
         db.session.commit()
     except:
@@ -118,7 +123,6 @@ def show(book_id):
     book = Books.query.get(book_id)
     genres = Genre.query.all()
     cover = Covers.query.filter(Covers.book_id==book_id).first()
-    print(book.markdown)
     reviews = Reviews.query.filter(Reviews.book_id == book.id).order_by(Reviews.created_at.desc()).all()
         
     user_review = None

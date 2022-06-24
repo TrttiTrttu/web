@@ -14,11 +14,11 @@
                     {% endif %}
                 </div>
                 <div class="mb-3 d-flex flex-column flex-grow-1">
-                    <label for="short_description">Краткое описание</label>
+                    <label for="short_desc">Краткое описание</label>
                     {% if request.endpoint == 'library.show' %}
                         <p>{{ book.markdown|safe }}</p>
                     {% else %}
-                        <textarea required class="form-control flex-grow-1" name="short_desc" id="text-content" cols="30" rows="5">{{ book.short_desc or '' }}</textarea>
+                        <textarea class="form-control flex-grow-1" name="short_desc" id="short_desc" cols="30" rows="5">{{ book.short_desc or '' }}</textarea>
                     {% endif %}
                 </div>
                 <div class="mb-3">

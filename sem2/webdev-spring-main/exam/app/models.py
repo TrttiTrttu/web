@@ -96,7 +96,16 @@ class Genre(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
 
+class Visits(db.Model):
+    __tablename__ = 'visits'
 
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    path = db.Column(db.String(100), nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False, server_default=sa.sql.func.now())
+
+
+    user = db.relationship('User')
 
 class Reviews(db.Model):
     __tablename__ = 'reviews'
@@ -108,7 +117,7 @@ class Reviews(db.Model):
     text = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, server_default=sa.sql.func.now())
 
-    book = db.relationship('Books')
+    book = db.relationship('Books', cascade="all, delete")
     user = db.relationship('User')
 
     @property
